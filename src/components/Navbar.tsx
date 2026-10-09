@@ -21,6 +21,8 @@ const NAV_LINKS = [
   { name: "Contact", href: "#contact" },
 ];
 
+export const dynamic = 'force-dynamic';
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);

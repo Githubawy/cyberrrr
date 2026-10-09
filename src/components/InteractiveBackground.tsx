@@ -23,7 +23,7 @@ export default function InteractiveBackground() {
       vy: number;
       size: number;
 
-      constructor() {
+      constructor(canvas: HTMLCanvasElement) {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
         this.vx = (Math.random() - 0.5) * 0.5;
@@ -31,7 +31,7 @@ export default function InteractiveBackground() {
         this.size = Math.random() * 2 + 1;
       }
 
-      update() {
+      update(canvas: HTMLCanvasElement) {
         this.x += this.vx;
         this.y += this.vy;
 
@@ -59,14 +59,14 @@ export default function InteractiveBackground() {
     const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      particles = Array.from({ length: 80 }, () => new Particle());
+      particles = Array.from({ length: 80 }, () => new Particle(canvas));
     };
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((p, i) => {
-        p.update();
+        p.update(canvas);
         p.draw();
 
         // Draw lines between nearby particles

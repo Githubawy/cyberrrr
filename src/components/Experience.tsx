@@ -129,15 +129,19 @@ export default function Experience() {
                   <p className="text-text-secondary text-sm italic opacity-70">
                     {job.description}
                   </p>
-                ) : (
+                ) : Array.isArray(job.description) ? (
                   <ul className="space-y-3">
-                    {job.description.map((bullet, j) => (
+                    {job.description.map((bullet: string, j: number) => (
                       <li key={j} className="text-text-secondary text-sm leading-relaxed flex gap-3">
                         <span className="text-accent mt-1.5" style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: 'currentColor', flexShrink: 0 }} />
                         {bullet}
                       </li>
                     ))}
                   </ul>
+                ) : (
+                  <p className="text-text-secondary text-sm leading-relaxed">
+                    {job.description}
+                  </p>
                 )}
               </motion.div>
             ))}

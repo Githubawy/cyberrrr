@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Terminal, ShieldWarning, CheckCircle, Info, ArrowRight, ArrowLeft } from "@phosphor-icons/react";
+import { Terminal, ShieldWarning, CheckCircle, Info, ArrowRight, ArrowLeft, ShieldCheck } from "@phosphor-icons/react";
 
 type Step = {
   id: string;

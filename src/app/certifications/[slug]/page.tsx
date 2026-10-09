@@ -72,7 +72,7 @@ export default function CertPage({ params }: { params: { slug: string } }) {
             <section>
               <h2 className="text-xl font-bold mb-4 text-accent">Key Competencies</h2>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {cert.details.map((detail, i) => (
+                {cert.details.map((detail: string, i: number) => (
                   <li key={i} className="flex items-center gap-3 text-text-secondary text-sm">
                     <div className="w-1.5 h-1.5 rounded-full bg-accent" />
                     {detail}
