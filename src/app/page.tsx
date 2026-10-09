@@ -1,69 +1,98 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "motion/react";
+import Hero from "@/components/Hero";
+import Expertise from "@/components/Expertise";
+import Projects from "@/components/Projects";
+import SecurityLab from "@/components/SecurityLab";
+import Experience from "@/components/Experience";
+import InteractiveBackground from "@/components/InteractiveBackground";
+import { ArrowUpRight } from "@phosphor-icons/react";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <InteractiveBackground />
+      <Hero />
+
+      <section id="about" className="py-24 px-6 relative z-10 bg-transparent">
+        <div className="max-w-3xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl font-bold mb-6 text-text-primary">About Me</h2>
+            <p className="text-text-secondary leading-relaxed">
+              I'm a Computer Science graduate focused on penetration testing, web application security, and network security. I approach security as a practical problem-solving process: understanding how systems work, identifying weaknesses, validating potential risks in controlled environments, and documenting findings clearly. I'm continuously developing my hands-on skills through security labs, technical projects, and structured experimentation.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      <Expertise />
+      <Projects />
+      <SecurityLab />
+      <Experience />
+
+      <section id="contact" className="py-32 px-6 bg-transparent border-t border-border text-center relative z-10">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6">Let's Connect</h2>
+          <p className="text-text-secondary mb-12 text-lg">
+            Looking for a security assessment or a dedicated penetration tester for your project?
           </p>
+          <div className="flex flex-col items-center gap-12">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <a
+                href="mailto:phillokahrba@gmail.com"
+                className="px-8 py-4 bg-accent text-white font-bold rounded-full hover:bg-opacity-90 transition-all active:scale-95 shadow-lg"
+              >
+                Email Me
+              </a>
+              <a
+                href="https://www.linkedin.com/in/omarqasim/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-4 bg-surface border border-border text-white font-bold rounded-full hover:bg-surface/80 transition-all active:scale-95"
+              >
+                LinkedIn
+              </a>
+            </div>
+
+            {/* Freelance Profiles Grid */}
+            <div className="flex flex-wrap justify-center gap-4 w-full max-w-2xl">
+              {[
+                { name: "Upwork", url: "https://www.upwork.com/freelancers/~01fc5c0390db831dd6?mp_source=share" },
+                { name: "Fiverr", url: "https://pro.fiverr.com/s/mmmdVL9" },
+                { name: "Contra", url: "https://contra.com/omar_qasim_ggsaxbpv?referralExperimentNid=DEFAULT_REFERRAL_PROGRAM&referrerUsername=omar_qasim_ggsaxbpv" },
+                { name: "Freelancer", url: "https://www.freelancer.com/u/omarqasim55?frm=omarqasim55&sb=t" },
+                { name: "HackerOne", url: "https://hackerone.com/phill0?type=user" },
+                { name: "Bugcrowd", url: "https://bugcrowd.com/h/phill0" },
+                { name: "YesWeHack", url: "https://yeswehack.com/hunters/OmarQasim" },
+                { name: "Intigriti", url: "https://app.intigriti.com/researcher/profile/omarqasim" },
+              ].map((platform) => (
+                <a
+                  key={platform.name}
+                  href={platform.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-4 bg-surface border border-border rounded-2xl text-sm font-medium text-text-secondary hover:text-text-primary hover:border-accent/50 transition-all flex items-center justify-center gap-3 group min-w-[160px] text-center"
+                >
+                  <span className="flex-1 text-center">{platform.name}</span>
+                  <ArrowUpRight size={16} className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+
+      <footer className="py-12 px-6 border-t border-border bg-background text-center">
+        <p className="text-text-secondary text-xs font-mono tracking-widest uppercase">
+          © 2026 Omar Qasim — Secure by Design
+        </p>
+      </footer>
+    </>
   );
 }
