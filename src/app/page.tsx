@@ -67,7 +67,7 @@ export default function Home() {
                 { name: "Fiverr", url: "https://pro.fiverr.com/s/mmmdVL9" },
                 { name: "Contra", url: "https://contra.com/omar_qasim_ggsaxbpv?referralExperimentNid=DEFAULT_REFERRAL_PROGRAM&referrerUsername=omar_qasim_ggsaxbpv" },
                 { name: "Freelancer", url: "https://www.freelancer.com/u/omarqasim55?frm=omarqasim55&sb=t" },
-                { name: "HackerOne", url: "https://hackerone.com/phill0?type=user" },
+                { name: "HackerOne", url: "https://hackerone.com/omarqasim?type=user" },
                 { name: "Bugcrowd", url: "https://bugcrowd.com/h/phill0" },
                 { name: "YesWeHack", url: "https://yeswehack.com/hunters/OmarQasim" },
                 { name: "Intigriti", url: "https://app.intigriti.com/researcher/profile/omarqasim" },
