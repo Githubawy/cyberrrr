@@ -9,26 +9,33 @@ import SectionTitle from "@/components/SectionTitle";
 
 const EXPERIENCE = [
   {
-    title: "SOC Analyst",
-    company: "Emperial Construction",
-    location: "Cairo, Egypt",
-    date: "August 2026 – Present",
-    // Responsibilities marked for review as per brief
-    description: "Responsibilities for this role are currently under review for verification.",
-    isProposed: true,
+    title: "Information Technology Security Specialist",
+    company: "Emperial EG",
+    location: "Nasr City",
+    date: "July 2026 – Present",
+    description: [
+      "Monitor and investigate security alerts using SIEM tools and Wazuh to detect suspicious activities, potential threats, and ongoing attacks.",
+      "Analyze security logs and event data to investigate malicious activity, identify attack patterns, and determine potential security impact.",
+      "Perform initial incident response and threat containment by blocking malicious IP addresses through Sophos Firewall and restricting malicious network traffic.",
+      "Monitor and analyze cPanel mail server logs to investigate suspicious email activity, detect potential abuse, and identify mail-related security incidents.",
+      "Investigate phishing emails and suspicious indicators to assess threats and support appropriate security response actions.",
+      "Review Sophos Firewall events and network traffic indicators to identify suspicious connections and potential security violations.",
+      "Document security investigations, response actions, and findings in ticketing systems to maintain incident records and support follow-up investigations.",
+      "Escalate complex or unresolved security incidents according to established incident-handling procedures.",
+    ],
   },
   {
-    title: "IT Specialist",
-    company: "Obour Hospital",
-    location: "Cairo, Egypt",
-    date: "September 2024 – July 2026",
+    title: "Information Technology Specialist",
+    company: "Farid Habib Hospital",
+    location: "El Obour, Al Qalyubiyah, Egypt",
+    date: "June 2025 – July 2026",
     description: [
-      "Delivered first- and second-level technical support to internal users, troubleshooting hardware, software, and network connectivity issues across the hospital environment.",
-      "Supported core IT infrastructure, including LAN, Windows Server 2022, and Active Directory Domain Services, and applied Group Policy security settings across organizational units.",
-      "Monitored and troubleshot DNS, DHCP, firewall rules, and NAT to maintain reliable network operations and resolve connectivity issues.",
-      "Used PowerShell to automate bulk user provisioning and routine configuration tasks.",
-      "Supported IT operations and disaster recovery planning through structured backup schedules using Windows Server Backup, with recovery procedures and technical documentation.",
-      "Documented incident resolution procedures, system configurations, and IT operations. Reviewed Windows Event Logs, including event IDs 4624, 4625, 4720, and 7045, to support troubleshooting and security monitoring.",
+      "Delivered first- and second-level technical support to internal users — reducing helpdesk tickets by standardizing troubleshooting procedures for hardware, software, and network issues across the hospital environment.",
+      "Supported core IT infrastructure including LAN, Windows Server 2022, and Active Directory DS — enforcing GPO-based security policies across segmented OUs and ensuring system integrity for 100+ domain users.",
+      "Maintained LAN uptime by monitoring and troubleshooting DNS, DHCP, firewall rules, and NAT — proactively identifying and resolving network issues before they impacted business operations.",
+      "Contributed to IT operations efficiency by scripting bulk user provisioning and configuration tasks in PowerShell.",
+      "Assisted in IT operations and disaster recovery planning by implementing structured backup schedules — daily incremental and weekly full backups via Windows Server Backup — with quarterly tested recovery procedures and full technical documentation.",
+      "Created detailed technical documentation for incident resolution, system configurations, and IT procedures — monitoring Windows Event Logs (4624, 4625, 4720, 7045) and building a knowledge base.",
     ],
   },
   {
@@ -101,11 +108,7 @@ export default function Experience() {
                   </div>
                 </div>
 
-                {job.isProposed ? (
-                  <p className="text-text-secondary text-sm italic opacity-70">
-                    {job.description}
-                  </p>
-                ) : Array.isArray(job.description) ? (
+                {Array.isArray(job.description) ? (
                   <ul className="space-y-3">
                     {job.description.map((bullet: string, j: number) => (
                       <li key={j} className="text-text-secondary text-sm leading-relaxed flex gap-3">
