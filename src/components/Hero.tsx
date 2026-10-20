@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { motion } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import { ArrowRight } from "@phosphor-icons/react";
 import Image from "next/image";
 
@@ -12,7 +12,7 @@ const heroContainer = {
   },
 };
 
-const heroItem = {
+const heroItem: Variants = {
   hidden: { opacity: 0, y: 60 },
   show: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } },
 };

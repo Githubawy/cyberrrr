@@ -6,10 +6,10 @@ import { ArrowUpRight } from "@phosphor-icons/react";
 import Link from "next/link";
 import { PROJECTS, type Project } from "@/lib/projects";
 import SectionTitle from "@/components/SectionTitle";
-import { Network, Code, ShieldCheck, Folder, Flask } from "@phosphor-icons/react";
+import { Network, Code, ShieldCheck, Folder, Flask, type Icon } from "@phosphor-icons/react";
 
 /* Icons keyed by slug so the shared data file stays render-agnostic */
-const PROJECT_ICONS: Record<Project["slug"], React.ComponentType<{ size: number; weight?: string }>> = {
+const PROJECT_ICONS: Record<Project["slug"], Icon> = {
   "faculty-network-infrastructure": Network,
   "network-management-system": Code,
   "web-app-security-assessment": ShieldCheck,

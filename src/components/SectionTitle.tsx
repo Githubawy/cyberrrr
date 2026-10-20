@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "motion/react";
+import { motion, type Variants } from "motion/react";
 
 type SectionTitleProps = {
   eyebrow: string;
@@ -13,7 +13,7 @@ type SectionTitleProps = {
   className?: string;
 };
 
-const reveal = {
+const reveal: Variants = {
   hidden: { y: "110%" },
   show: (i: number) => ({
     y: 0,

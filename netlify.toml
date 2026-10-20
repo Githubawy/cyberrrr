@@ -1,0 +1,13 @@
+# Netlify configuration for the Next.js portfolio
+# The official Next.js runtime is auto-installed by Netlify for Next projects.
+
+[build]
+  command = "npx next build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
