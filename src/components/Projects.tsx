@@ -21,7 +21,12 @@ export default function Projects() {
   return (
     <section id="projects" className="py-24 px-6 bg-transparent relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
-        <SectionTitle eyebrow="Selected Work" first="Featured" second="Projects & Labs" />
+        <SectionTitle
+          eyebrow="Selected Work"
+          first="Featured"
+          second="Projects & Labs"
+          meta={`0${PROJECTS.length} Projects — 0${PROJECTS.length} Case Studies`}
+        />
 
         {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">

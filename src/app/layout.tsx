@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, JetBrains_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import BackToTop from "@/components/BackToTop";
 import "./globals.css";
 import { Suspense } from "react";
 
@@ -33,6 +34,7 @@ export default function RootLayout({
           <Navbar />
         </Suspense>
         <main>{children}</main>
+        <BackToTop />
       </body>
     </html>
   );
