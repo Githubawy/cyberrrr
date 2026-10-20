@@ -12,7 +12,23 @@ export default function InteractiveBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationFrameId: number;
+    /* Adaptive settings: the desktop look is unchanged; mobile gets a
+       lighter, cheaper variant that keeps the same vibe without the
+       frame drops caused by the O(n²) line pass on small screens. */
+    const isMobile =
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 768px)").matches;
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const COUNT = isMobile ? 26 : 80;
+    const LINK_DIST = isMobile ? 110 : 150;
+    const SPEED = isMobile ? 0.25 : 0.5;
+    const LINE_ALPHA = isMobile ? 0.45 : 1.0;
+
+    let animationFrameId = 0;
+    let resizeTimer: ReturnType<typeof setTimeout> | undefined;
     let particles: Particle[] = [];
     const mouse = { x: -1000, y: -1000 };
 
@@ -26,9 +42,9 @@ export default function InteractiveBackground() {
       constructor(canvas: HTMLCanvasElement) {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.size = Math.random() * 2 + 1;
+        this.vx = (Math.random() - 0.5) * SPEED;
+        this.vy = (Math.random() - 0.5) * SPEED;
+        this.size = Math.random() * (isMobile ? 1.6 : 2) + 1;
       }
 
       update(canvas: HTMLCanvasElement) {
@@ -56,36 +72,58 @@ export default function InteractiveBackground() {
       }
     }
 
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      particles = Array.from({ length: 80 }, () => new Particle(canvas));
-    };
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach((p, i) => {
-        p.update(canvas);
-        p.draw();
-
-        // Draw lines between nearby particles
+    const drawLinks = () => {
+      if (!ctx) return;
+      for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
+          const p = particles[i];
           const p2 = particles[j];
           const dx = p.x - p2.x;
           const dy = p.y - p2.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 150) {
+          if (dist < LINK_DIST) {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(46, 91, 255, ${1 - dist / 150})`;
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = `rgba(46, 91, 255, ${
+              (1 - dist / LINK_DIST) * LINE_ALPHA
+            })`;
+            ctx.lineWidth = isMobile ? 0.4 : 0.5;
             ctx.stroke();
           }
         }
+      }
+    };
+
+    const drawFrame = () => {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p) => {
+        p.update(canvas);
+        p.draw();
       });
+      drawLinks();
+    };
+
+    const animate = () => {
+      drawFrame();
       animationFrameId = requestAnimationFrame(animate);
+    };
+
+    const buildParticles = () => {
+      particles = Array.from({ length: COUNT }, () => new Particle(canvas));
+    };
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      buildParticles();
+      if (prefersReduced) drawFrame(); // static render, no loop
+    };
+
+    const handleResizeDebounced = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resize, 150);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -93,14 +131,28 @@ export default function InteractiveBackground() {
       mouse.y = e.clientY;
     };
 
-    window.addEventListener("resize", resize);
+    /* Save battery / prevent scroll stutter: stop the loop when the tab is hidden */
+    const handleVisibility = () => {
+      cancelAnimationFrame(animationFrameId);
+      if (!document.hidden && !prefersReduced) animate();
+    };
+
+    window.addEventListener("resize", handleResizeDebounced);
     window.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("visibilitychange", handleVisibility);
+
     resize();
-    animate();
+    if (prefersReduced) {
+      drawFrame(); // single static frame
+    } else {
+      animate();
+    }
 
     return () => {
-      window.removeEventListener("resize", resize);
+      clearTimeout(resizeTimer);
+      window.removeEventListener("resize", handleResizeDebounced);
       window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("visibilitychange", handleVisibility);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
