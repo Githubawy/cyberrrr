@@ -49,7 +49,7 @@ export default function Expertise() {
           className="mb-20"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
           {EXPERTISE.map((item, i) => (
             <motion.div
               key={item.title}
@@ -57,12 +57,12 @@ export default function Expertise() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="group p-10 bg-surface border border-border rounded-3xl hover:border-accent/50 transition-all duration-500 hover:bg-surface/80 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(46,91,255,0.12)]"
+              className="group p-6 sm:p-10 bg-surface border border-border rounded-3xl hover:border-accent/50 transition-all duration-500 hover:bg-surface/80 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(46,91,255,0.12)]"
             >
-              <div className="w-14 h-14 bg-background border border-border rounded-2xl flex items-center justify-center mb-8 text-accent group-hover:border-accent/40 group-hover:scale-110 transition-all duration-500">
-                <item.icon size={28} weight="duotone" />
+              <div className="w-11 h-11 sm:w-14 sm:h-14 bg-background border border-border rounded-2xl flex items-center justify-center mb-6 sm:mb-8 text-accent group-hover:border-accent/40 group-hover:scale-110 transition-all duration-500">
+                <item.icon size={28} weight="duotone" className="w-6 h-6 sm:w-7 sm:h-7" />
               </div>
-              <h3 className="text-2xl font-bold mb-4 group-hover:text-accent transition-colors">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 group-hover:text-accent transition-colors">
                 {item.title}
               </h3>
               <p className="text-text-secondary text-sm leading-relaxed opacity-70 group-hover:opacity-100 transition-opacity duration-500">

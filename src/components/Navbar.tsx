@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
 import { List, X } from "@phosphor-icons/react";
 import Link from "next/link";
@@ -106,31 +107,33 @@ export default function Navbar() {
         style={{ scaleX: progress }}
       />
 
-      <AnimatePresence>
-        {isOpen && (
+      {isOpen &&
+        typeof document !== "undefined" &&
+        createPortal(
           <>
             {/* Dimmed backdrop — tap to close */}
             <motion.button
               key="menu-backdrop"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
               aria-label="Close menu"
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 top-16 z-[-1] bg-background/80 backdrop-blur-sm md:hidden cursor-default"
+              className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm md:hidden cursor-default"
             />
 
-            {/* Full-height menu panel */}
+            {/* Full-height menu panel — portaled to <body> so position:fixed
+                resolves against the viewport, NOT the nav (whose
+                backdrop-blur-md turns it into a containing block and
+                collapses the panel once scrolled) */}
             <motion.div
               key="menu-panel"
               initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed top-16 left-0 right-0 bottom-0 bg-background md:hidden overflow-y-auto"
+              className="fixed top-16 left-0 right-0 bottom-0 z-40 bg-background md:hidden overflow-y-auto"
             >
-              <div className="px-8 pt-10 pb-8 flex flex-col gap-7">
+              <div className="px-8 pt-8 pb-8 flex flex-col gap-6">
                 {NAV_LINKS.map((link) => (
                   <a
                     key={link.name}
@@ -139,7 +142,7 @@ export default function Navbar() {
                       setIsOpen(false);
                       handleNavigation(e, link.href);
                     }}
-                    className="text-3xl font-bold text-text-secondary hover:text-text-primary active:text-accent transition-colors"
+                    className="text-xl font-bold text-text-secondary hover:text-text-primary active:text-accent transition-colors"
                   >
                     {link.name}
                   </a>
@@ -150,15 +153,15 @@ export default function Navbar() {
                     setIsOpen(false);
                     handleNavigation(e, "#contact");
                   }}
-                  className="mt-6 px-8 py-4 bg-accent text-white text-sm font-bold rounded-full text-center shadow-[0_0_30px_rgba(46,91,255,0.4)]"
+                  className="mt-4 px-8 py-4 bg-accent text-white text-sm font-bold rounded-full text-center shadow-[0_0_30px_rgba(46,91,255,0.4)]"
                 >
                   Get in Touch
                 </a>
               </div>
             </motion.div>
-          </>
+          </>,
+          document.body
         )}
-      </AnimatePresence>
     </nav>
   );
 }

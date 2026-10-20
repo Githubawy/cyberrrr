@@ -29,7 +29,7 @@ export default function Projects() {
         />
 
         {/* Uniform cards matching the Expertise grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
           {PROJECTS.map((project, i) => {
             const Icon = PROJECT_ICONS[project.slug];
             return (
@@ -39,13 +39,13 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="group flex flex-col p-10 bg-surface border border-border rounded-3xl hover:border-accent/50 transition-all duration-500 hover:bg-surface/80 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(46,91,255,0.12)]"
+              className="group flex flex-col p-6 sm:p-10 bg-surface border border-border rounded-3xl hover:border-accent/50 transition-all duration-500 hover:bg-surface/80 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(46,91,255,0.12)]"
             >
-              <div className="flex items-start justify-between mb-8">
-                <div className="w-14 h-14 bg-background border border-border rounded-2xl flex items-center justify-center text-accent group-hover:border-accent/40 group-hover:scale-110 transition-all duration-500">
-                  {Icon && <Icon size={28} weight="duotone" />}
+              <div className="flex items-start justify-between mb-6 sm:mb-8">
+                <div className="w-11 h-11 sm:w-14 sm:h-14 bg-background border border-border rounded-2xl flex items-center justify-center text-accent group-hover:border-accent/40 group-hover:scale-110 transition-all duration-500">
+                  {Icon && <Icon size={28} weight="duotone" className="w-6 h-6 sm:w-7 sm:h-7" />}
                 </div>
-                <span className={`text-[10px] uppercase tracking-widest px-2 py-1 rounded-full border ${
+                <span className={`text-[9px] sm:text-[10px] uppercase tracking-widest px-2 py-1 rounded-full border ${
                   project.type === "Completed"
                     ? "border-emerald-500/30 text-emerald-400"
                     : "border-accent/40 text-accent"
@@ -54,7 +54,7 @@ export default function Projects() {
                 </span>
               </div>
 
-              <h3 className="text-2xl font-bold mb-4 group-hover:text-accent transition-colors">
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 group-hover:text-accent transition-colors">
                 {project.title}
               </h3>
               <p className="text-text-secondary text-sm leading-relaxed opacity-70 group-hover:opacity-100 transition-opacity duration-500">
