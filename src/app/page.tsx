@@ -4,7 +4,6 @@ import { motion } from "motion/react";
 import Hero from "@/components/Hero";
 import Expertise from "@/components/Expertise";
 import Projects from "@/components/Projects";
-import SecurityLab from "@/components/SecurityLab";
 import Experience from "@/components/Experience";
 import InteractiveBackground from "@/components/InteractiveBackground";
 import { ArrowUpRight } from "@phosphor-icons/react";
@@ -33,7 +32,6 @@ export default function Home() {
 
       <Expertise />
       <Projects />
-      <SecurityLab />
       <Experience />
 
       <section id="contact" className="py-32 px-6 bg-transparent border-t border-border text-center relative z-10">

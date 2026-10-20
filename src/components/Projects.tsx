@@ -28,63 +28,55 @@ export default function Projects() {
           meta={`0${PROJECTS.length} Projects — 0${PROJECTS.length} Case Studies`}
         />
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+        {/* Uniform cards matching the Expertise grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {PROJECTS.map((project, i) => {
             const Icon = PROJECT_ICONS[project.slug];
             return (
             <motion.div
               key={project.slug}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className={`group relative overflow-hidden rounded-3xl border border-border bg-surface p-8 transition-all duration-300 hover:border-accent/50 hover:bg-surface/80 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(46,91,255,0.12)] ${
-                project.size === "large" ? "md:col-span-2 md:row-span-2" : ""
-              }`}
+              transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="group flex flex-col p-10 bg-surface border border-border rounded-3xl hover:border-accent/50 transition-all duration-500 hover:bg-surface/80 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(46,91,255,0.12)]"
             >
-              <div className="flex flex-col h-full justify-between relative z-10">
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="p-2 bg-background border border-border rounded-lg text-accent transition-colors">
-                      {Icon && <Icon size={20} weight="duotone" />}
-                    </div>
-                    <span className={`text-[10px] uppercase tracking-widest px-2 py-1 rounded-full border ${
-                      project.type === "Completed"
-                        ? "border-emerald-500/30 text-emerald-400"
-                        : "border-accent/40 text-accent"
-                    }`}>
-                      {project.type}
-                    </span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-3 tracking-tight group-hover:text-accent transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-text-secondary text-sm leading-relaxed line-clamp-3">
-                    {project.description}
-                  </p>
+              <div className="flex items-start justify-between mb-8">
+                <div className="w-14 h-14 bg-background border border-border rounded-2xl flex items-center justify-center text-accent group-hover:border-accent/40 group-hover:scale-110 transition-all duration-500">
+                  {Icon && <Icon size={28} weight="duotone" />}
                 </div>
-
-                <div className="flex flex-col gap-4 mt-6">
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map(tag => (
-                      <span key={tag} className="text-[10px] font-mono px-2 py-0.5 bg-background border border-border rounded text-text-secondary">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <Link
-                    href={`/projects/${project.slug}`}
-                    className="flex items-center gap-2 text-xs font-bold text-text-primary group-hover:text-accent transition-colors"
-                  >
-                    View Case Study
-                    <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </Link>
-                </div>
+                <span className={`text-[10px] uppercase tracking-widest px-2 py-1 rounded-full border ${
+                  project.type === "Completed"
+                    ? "border-emerald-500/30 text-emerald-400"
+                    : "border-accent/40 text-accent"
+                }`}>
+                  {project.type}
+                </span>
               </div>
 
-              {/* Background Decorative Element */}
-              <div className="absolute -right-12 -bottom-12 w-48 h-48 bg-accent/5 blur-3xl rounded-full group-hover:bg-accent/10 transition-all duration-500" />
+              <h3 className="text-2xl font-bold mb-4 group-hover:text-accent transition-colors">
+                {project.title}
+              </h3>
+              <p className="text-text-secondary text-sm leading-relaxed opacity-70 group-hover:opacity-100 transition-opacity duration-500">
+                {project.description}
+              </p>
+
+              <div className="flex flex-col gap-4 mt-auto pt-8">
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map(tag => (
+                    <span key={tag} className="text-[10px] font-mono px-2 py-0.5 bg-background border border-border rounded text-text-secondary">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="flex items-center gap-2 text-xs font-bold text-text-primary group-hover:text-accent transition-colors"
+                >
+                  View Case Study
+                  <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Link>
+              </div>
             </motion.div>
             );
           })}
