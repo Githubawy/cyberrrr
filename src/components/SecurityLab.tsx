@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Terminal, ShieldWarning, CheckCircle, Info, ArrowRight, ArrowLeft, ShieldCheck } from "@phosphor-icons/react";
+import SectionTitle from "@/components/SectionTitle";
 
 type Step = {
   id: string;
@@ -51,8 +52,33 @@ const LAB_STEPS: Step[] = [
 export default function SecurityLab() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  const [typedLen, setTypedLen] = useState(0);
+  const step = LAB_STEPS[currentStep];
+  const command = isComplete ? "" : step.command;
+
+  useEffect(() => {
+    setTypedLen(0);
+    if (isComplete) return;
+    const id = setInterval(() => {
+      setTypedLen((n) => {
+        if (n >= command.length) {
+          clearInterval(id);
+          return command.length;
+        }
+        return n + 1;
+      });
+    }, 24);
+    return () => clearInterval(id);
+  }, [currentStep, isComplete]);
+
+  const typedCommand = command.slice(0, typedLen);
+  const isTyping = typedLen < command.length;
 
   const nextStep = () => {
+    if (isTyping) {
+      setTypedLen(command.length);
+      return;
+    }
     if (currentStep < LAB_STEPS.length - 1) {
       setCurrentStep((prev) => prev + 1);
     } else {
@@ -68,17 +94,12 @@ export default function SecurityLab() {
   return (
     <section id="lab" className="py-24 px-6 bg-transparent relative overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="flex flex-col gap-4 mb-16">
-          <span className="text-accent font-mono text-xs uppercase tracking-[0.4em]">
-            Interactive Demo
-          </span>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tighter leading-none">
-            The Lab <span className="text-text-secondary">Simulation</span>
-          </h2>
-          <p className="text-text-secondary max-w-2xl text-lg">
-            Experience a simplified penetration testing workflow. This demonstration uses simulated data to showcase the reconnaissance, enumeration, and exploitation process.
-          </p>
-        </div>
+        <SectionTitle
+          eyebrow="Interactive Demo"
+          first={"The Lab"}
+          second="Simulation"
+          description="Experience a simplified penetration testing workflow. This demonstration uses simulated data to showcase the reconnaissance, enumeration, and exploitation process."
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Left: Step Navigator */}
@@ -133,22 +154,48 @@ export default function SecurityLab() {
                       transition={{ duration: 0.3 }}
                       className="flex flex-col gap-6"
                     >
-                      <div className="flex gap-2">
-                        <span className="text-emerald-500">guest@lab:~$</span>
-                        <span className="text-text-primary">{LAB_STEPS[currentStep].command}</span>
+                      <div className="flex gap-2 items-center">
+                        <span className="text-emerald-500 flex-shrink-0">guest@lab:~$</span>
+                        <span className="text-text-primary">
+                          {typedCommand}
+                          {!isTyping ? null : (
+                            <span className="inline-block w-2 h-[1.1em] bg-accent ml-0.5 align-middle animate-pulse" />
+                          )}
+                        </span>
                       </div>
 
-                      <div className="bg-black/40 p-4 rounded-lg border border-border text-text-secondary leading-relaxed">
-                        {LAB_STEPS[currentStep].output}
-                      </div>
+                      <AnimatePresence>
+                        {!isTyping ? (
+                          <motion.div
+                            key={`out-${currentStep}`}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="bg-black/40 p-4 rounded-lg border border-border text-text-secondary leading-relaxed"
+                          >
+                            {step.output.split("\n").map((line, j) => (
+                              <motion.div
+                                key={j}
+                                initial={{ opacity: 0, x: -8 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: j * 0.12, duration: 0.25 }}
+                                className="whitespace-pre-wrap"
+                              >
+                                {line}
+                              </motion.div>
+                            ))}
+                          </motion.div>
+                        ) : null}
+                      </AnimatePresence>
 
-                      <div className="flex flex-col gap-3">
+                      <div className={`flex flex-col gap-3 transition-opacity duration-500 ${isTyping ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
                         <div className="flex items-center gap-2 text-accent text-xs font-bold uppercase tracking-tighter">
                           <ShieldWarning size={14} />
                           Key Findings:
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          {LAB_STEPS[currentStep].findings.map((f, i) => (
+                          {step.findings.map((f, i) => (
                             <div key={i} className="flex items-center gap-2 text-text-secondary text-xs">
                               <CheckCircle size={14} className="text-emerald-500" />
                               {f}

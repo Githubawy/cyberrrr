@@ -1,12 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { motion } from "motion/react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ShieldCheck, Globe, ChartLine, HardDrive, Terminal, Network } from "@phosphor-icons/react";
-
-gsap.registerPlugin(ScrollTrigger);
+import SectionTitle from "@/components/SectionTitle";
 
 const EXPERTISE = [
   {
@@ -42,25 +39,15 @@ const EXPERTISE = [
 ];
 
 export default function Expertise() {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    // Remove GSAP entirely for this section to ensure no layout interference
-    // Let Tailwind and Framer Motion handle everything for maximum stability
-  }, []);
-
   return (
-    <section ref={sectionRef} id="expertise" className="py-32 px-6 bg-background relative">
+    <section id="expertise" className="py-32 px-6 bg-transparent relative">
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="expertise-title flex flex-col gap-4 mb-20">
-          <span className="text-accent font-mono text-xs uppercase tracking-[0.4em]">
-            Technical Capabilities
-          </span>
-          <h2 className="text-5xl md:text-8xl font-bold tracking-tighter leading-none">
-            Expertise & <br />
-            <span className="text-text-secondary">Technical Focus</span>
-          </h2>
-        </div>
+        <SectionTitle
+          eyebrow="Technical Capabilities"
+          first={"Expertise &"}
+          second="Technical Focus"
+          className="mb-20"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {EXPERTISE.map((item, i) => (
@@ -70,9 +57,9 @@ export default function Expertise() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="group p-10 bg-surface border border-border rounded-3xl hover:border-accent/50 transition-all duration-500 hover:bg-surface/80 backdrop-blur-sm"
+              className="group p-10 bg-surface border border-border rounded-3xl hover:border-accent/50 transition-all duration-500 hover:bg-surface/80 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(46,91,255,0.12)]"
             >
-              <div className="w-14 h-14 bg-background border border-border rounded-2xl flex items-center justify-center mb-8 group-hover:text-accent group-hover:border-accent/30 transition-all duration-500 group-hover:scale-110">
+              <div className="w-14 h-14 bg-background border border-border rounded-2xl flex items-center justify-center mb-8 text-accent group-hover:border-accent/40 group-hover:scale-110 transition-all duration-500">
                 <item.icon size={28} weight="duotone" />
               </div>
               <h3 className="text-2xl font-bold mb-4 group-hover:text-accent transition-colors">

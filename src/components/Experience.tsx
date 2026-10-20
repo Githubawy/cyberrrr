@@ -4,6 +4,8 @@ import React from "react";
 import { motion } from "motion/react";
 import { Calendar, MapPin, GraduationCap, SealCheck, ArrowUpRight } from "@phosphor-icons/react";
 import Link from "next/link";
+import { CERTIFICATIONS } from "@/lib/certifications";
+import SectionTitle from "@/components/SectionTitle";
 
 const EXPERIENCE = [
   {
@@ -61,26 +63,8 @@ const EDUCATION = [
   },
 ];
 
-const CERTIFICATIONS = [
-  {
-    slug: "vulnerability-analyst-pentesting",
-    name: "Vulnerability Analyst & Pentesting Professional Course",
-    issuer: "Digital Egypt Pioneers Initiative (DEPI)",
-    year: "2026",
-  },
-  {
-    slug: "hcia-security",
-    name: "HCIA-Security — Huawei",
-    issuer: "Huawei",
-    year: "2025",
-  },
-  {
-    slug: "cybersecurity-beginners",
-    name: "Cybersecurity for Beginners Path Certificate",
-    issuer: "MaharaTech, ITI",
-    year: "2024",
-  },
-];
+const CERTS = CERTIFICATIONS;
+
 
 export default function Experience() {
   return (
@@ -88,15 +72,7 @@ export default function Experience() {
       {/* Experience Section */}
       <section id="experience" className="py-24 px-6 bg-transparent relative">
         <div className="max-w-5xl mx-auto">
-          <div className="flex flex-col gap-4 mb-16">
-            <span className="text-accent font-mono text-xs uppercase tracking-[0.4em]">
-              Professional Path
-            </span>
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter leading-none">
-              Experience & <br />
-              <span className="text-text-secondary">Work History</span>
-            </h2>
-          </div>
+          <SectionTitle eyebrow="Professional Path" first={"Experience &"} second="Work History" />
 
           <div className="relative border-l border-border ml-4 pl-8 space-y-12">
             {EXPERIENCE.map((job, i) => (
@@ -150,17 +126,9 @@ export default function Experience() {
       </section>
 
       {/* Education & Certs Section */}
-      <section id="education" className="py-24 px-6 bg-transparent relative z-10 -mt-52">
+      <section id="education" className="py-24 px-6 bg-transparent relative z-10 -mt-32 lg:-mt-52">
         <div className="max-w-5xl mx-auto">
-          <div className="flex flex-col gap-4 mb-12">
-            <span className="text-accent font-mono text-xs uppercase tracking-[0.4em]">
-              Academic Foundation
-            </span>
-            <h2 className="text-4xl md:text-6xl font-bold tracking-tighter leading-none">
-              Education & <br />
-              <span className="text-text-secondary">Certifications</span>
-            </h2>
-          </div>
+          <SectionTitle eyebrow="Academic Foundation" first={"Education &"} second="Certifications" className="mb-12" />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             <div className="flex flex-col gap-8">
@@ -185,7 +153,7 @@ export default function Experience() {
                 <h2 className="text-2xl font-bold tracking-tight">Certifications</h2>
               </div>
               <div className="space-y-4">
-                {CERTIFICATIONS.map((cert, i) => (
+                {CERTS.map((cert, i) => (
                   <Link
                     key={i}
                     href={`/certifications/${cert.slug}`}

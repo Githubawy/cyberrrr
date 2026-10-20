@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
 import { List, X } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
@@ -21,13 +21,13 @@ const NAV_LINKS = [
   { name: "Contact", href: "#contact" },
 ];
 
-export const dynamic = 'force-dynamic';
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.4 });
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -100,6 +100,12 @@ export default function Navbar() {
           {isOpen ? <X size={24} /> : <List size={24} />}
         </button>
       </div>
+
+      {/* Scroll progress line */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-[2px] origin-left bg-gradient-to-r from-accent/40 via-accent to-accent"
+        style={{ scaleX: progress }}
+      />
 
       <AnimatePresence>
         {isOpen && (

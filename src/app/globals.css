@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme {
+@theme inline {
   --color-background: #050507;
   --color-surface: #0f0f12;
   --color-border: #1f1f23;
@@ -8,8 +8,9 @@
   --color-text-primary: #ffffff;
   --color-text-secondary: #94a3b8;
 
-  --font-sans: 'Geist', ui-sans-serif, system-ui;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular;
+  /* Provided by next/font in layout.tsx (real downloaded fonts) */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 }
 
 @layer base {
