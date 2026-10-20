@@ -108,28 +108,55 @@ export default function Navbar() {
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="absolute top-full left-0 right-0 bg-surface border-b border-border overflow-hidden md:hidden"
-          >
-            <div className="p-8 flex flex-col gap-6">
-              {NAV_LINKS.map((link) => (
+          <>
+            {/* Dimmed backdrop — tap to close */}
+            <motion.button
+              key="menu-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              aria-label="Close menu"
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 top-16 z-[-1] bg-background/80 backdrop-blur-sm md:hidden cursor-default"
+            />
+
+            {/* Full-height menu panel */}
+            <motion.div
+              key="menu-panel"
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed top-16 left-0 right-0 bottom-0 bg-background md:hidden overflow-y-auto"
+            >
+              <div className="px-8 pt-10 pb-8 flex flex-col gap-7">
+                {NAV_LINKS.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => {
+                      setIsOpen(false);
+                      handleNavigation(e, link.href);
+                    }}
+                    className="text-3xl font-bold text-text-secondary hover:text-text-primary active:text-accent transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                ))}
                 <a
-                  key={link.name}
-                  href={link.href}
+                  href="#contact"
                   onClick={(e) => {
                     setIsOpen(false);
-                    handleNavigation(e, link.href);
+                    handleNavigation(e, "#contact");
                   }}
-                  className="text-2xl font-bold text-text-secondary hover:text-text-primary transition-colors"
+                  className="mt-6 px-8 py-4 bg-accent text-white text-sm font-bold rounded-full text-center shadow-[0_0_30px_rgba(46,91,255,0.4)]"
                 >
-                  {link.name}
+                  Get in Touch
                 </a>
-              ))}
-            </div>
-          </motion.div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>

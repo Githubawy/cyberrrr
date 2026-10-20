@@ -45,20 +45,20 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[100svh] flex items-center justify-center px-6 pt-28 pb-16 lg:py-0 bg-transparent">
+    <section className="relative min-h-[100svh] flex items-center justify-center px-6 pt-24 pb-12 lg:py-0 bg-transparent">
       {/* Cinematic Radial Wash (clipped here so it can't leak outside the section) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vw] bg-accent/10 rounded-full blur-[160px]" />
       </div>
 
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
 
-        {/* Left Column: Portrait */}
+        {/* Left Column: Portrait — after the text on mobile (order-2), left side on desktop */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-[210px] sm:max-w-[330px] mx-auto"
+          className="relative order-2 lg:order-1 w-full max-w-[210px] sm:max-w-[330px] mx-auto"
         >
           {/* Ambient glow */}
           <div className="absolute inset-0 bg-accent/25 blur-[70px] rounded-full" />
@@ -132,12 +132,12 @@ export default function Hero() {
           <div className="absolute -bottom-6 left-2 right-2 h-2 rounded-full bg-accent/30 blur-[10px]" />
         </motion.div>
 
-        {/* Right Column: Identity */}
+        {/* Right Column: Identity — first on mobile (order-1), right side on desktop */}
         <motion.div
           variants={heroContainer}
           initial="hidden"
           animate="show"
-          className="flex flex-col items-center lg:items-start text-center lg:text-left gap-8"
+          className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 lg:gap-8 order-1 lg:order-2"
         >
           <motion.span
             variants={heroItem}
@@ -162,7 +162,7 @@ export default function Hero() {
 
           <motion.p
             variants={heroItem}
-            className="text-text-secondary max-w-xl mx-auto lg:mx-0 text-lg md:text-xl leading-relaxed mb-12"
+            className="text-text-secondary max-w-xl mx-auto lg:mx-0 text-lg md:text-xl leading-relaxed mb-8 lg:mb-12"
           >
             Securing digital ecosystems through rigorous vulnerability assessment
             and architectural analysis. Identifying critical risks before they are exploited.
