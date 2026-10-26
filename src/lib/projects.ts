@@ -369,6 +369,10 @@ export type SoftwareCaseStudy = {
   features: {
     heading: string;
     cards: SoftwareCaseStudyFeature[];
+    phpMyAdmin?: {
+      heading: string;
+      items: SoftwareCaseStudyFeature[];
+    };
     moreViews?: {
       heading: string;
       items: SoftwareCaseStudyFeature[];
@@ -433,7 +437,7 @@ export const SOFTWARE_CASE_STUDIES: Record<string, SoftwareCaseStudy> = {
           title: "MySQL Database",
           description:
             "Stores device records, port information, and user-account data. The documented schema includes devices, ports, and users.",
-          status: "Documented in project description",
+          status: "Visible in system screenshots",
         },
         {
           index: "04",
@@ -517,10 +521,43 @@ export const SOFTWARE_CASE_STUDIES: Record<string, SoftwareCaseStudy> = {
         {
           title: "Database Design",
           description:
-            "Organizes device, port, and user information through a relational MySQL schema.",
-          placeholder: "Database ERD diagram — schema screenshot to be added",
+            "Organizes device, port, and user information through a relational MySQL schema — captured from the phpMyAdmin interface of the documented database. A device connects to many ports; users hold accounts alongside the inventory tables.",
+          image: {
+            src: "/projects/network-management-system/database-erd.png",
+            width: 1085,
+            height: 489,
+            alt: "Database schema diagram showing three related tables: devices (id, name, ip_address, status, type), ports (id, port_number, status, device_id foreign key, description, last_updated, speed, vlan_id, mac_address) and users (id, username, email, password, role, created_at), with a link from ports.device_id to devices.id.",
+            caption: "Schema diagram — devices ↔ ports (via device_id) ↔ users.",
+          },
         },
       ],
+      phpMyAdmin: {
+        heading: "The Schema in phpMyAdmin — Tables & Accounts",
+        items: [
+          {
+            title: "Ports Table",
+            description: "Port rows with number, status, device link, description, speed, VLAN ID and MAC address.",
+            image: {
+              src: "/projects/network-management-system/db-ports-table.png",
+              width: 1081,
+              height: 527,
+              alt: "Screenshot of the phpMyAdmin ports table in the networkpro_db database: columns port_number, status, device_id, description, speed, vlan_id and mac_address with several active and inactive port rows.",
+              caption: "Ports table — active and inactive port records in the documented schema.",
+            },
+          },
+          {
+            title: "Users Table",
+            description: "Team accounts with hashed passwords — username, email and password values are blurred for privacy.",
+            image: {
+              src: "/projects/network-management-system/db-users-table.png",
+              width: 1143,
+              height: 543,
+              alt: "Screenshot of the phpMyAdmin users table in the networkpro_db database: columns id, username, email, password, role and created_at, with the personal data values blurred for privacy while the role and account-creation date columns remain visible.",
+              caption: "Users table — eight team accounts with hashed passwords; personal values redacted.",
+            },
+          },
+        ],
+      },
       moreViews: {
         heading: "Working With the Records — Forms & Accounts",
         items: [

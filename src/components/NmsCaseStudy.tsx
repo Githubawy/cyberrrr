@@ -248,6 +248,27 @@ export default function NmsCaseStudy({ project, study }: { project: Project; stu
             ))}
           </div>
 
+          {study.features.phpMyAdmin ? (
+            <div className="mt-16">
+              <div className="flex items-center gap-3 mb-8">
+                <span className="h-px flex-1 bg-border" aria-hidden="true" />
+                <h3 className="text-base md:text-lg font-bold tracking-tight text-text-secondary text-center px-4">
+                  {study.features.phpMyAdmin.heading}
+                </h3>
+                <span className="h-px flex-1 bg-border" aria-hidden="true" />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {study.features.phpMyAdmin.items.map((view) => (
+                  <div key={view.title} className="p-5 bg-surface border border-border rounded-3xl flex flex-col gap-4">
+                    {view.image ? <LightboxImage image={view.image} className="[&>button]:rounded-xl" /> : null}
+                    <h4 className="text-base font-bold">{view.title}</h4>
+                    <p className="text-text-secondary text-sm leading-relaxed opacity-90 -mt-2">{view.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
           {study.features.moreViews ? (
             <div className="mt-16">
               <div className="flex items-center gap-3 mb-8">
