@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
 import { List, X } from "@phosphor-icons/react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -68,7 +69,16 @@ export default function Navbar() {
           href="/"
           className="text-xl font-bold tracking-tighter group flex items-center gap-3"
         >
-          <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center transition-transform group-hover:scale-110" />
+          <div className="relative w-8 h-8 rounded-full overflow-hidden border border-accent/50 flex-shrink-0 transition-transform group-hover:scale-110">
+            <Image
+              src="/profile.jpg"
+              alt="Omar Qasim logo"
+              fill
+              sizes="32px"
+              className="object-cover"
+              priority
+            />
+          </div>
           <span className="relative">Omar Qasim</span>
         </Link>
 
