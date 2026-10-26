@@ -247,11 +247,37 @@ export default function NmsCaseStudy({ project, study }: { project: Project; stu
               </div>
             ))}
           </div>
+
+          {study.features.moreViews ? (
+            <div className="mt-16">
+              <div className="flex items-center gap-3 mb-8">
+                <span className="h-px flex-1 bg-border" aria-hidden="true" />
+                <h3 className="text-base md:text-lg font-bold tracking-tight text-text-secondary text-center px-4">
+                  {study.features.moreViews.heading}
+                </h3>
+                <span className="h-px flex-1 bg-border" aria-hidden="true" />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {study.features.moreViews.items.map((view) => (
+                  <div key={view.title} className="p-4 bg-surface border border-border rounded-2xl flex flex-col gap-3">
+                    {view.image ? (
+                      <LightboxImage image={view.image} className="[&_figcaption]:hidden [&>button]:rounded-lg" />
+                    ) : null}
+                    <h4 className="text-sm font-bold">{view.title}</h4>
+                    <p className="text-text-secondary text-xs leading-relaxed opacity-90 -mt-2">{view.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </section>
 
         {/* ── 4. Contribution & Methodology ───────────────────────── */}
         <section id="methodology" className={`${SECTION_SPACING} scroll-mt-28`}>
           <SectionHeading eyebrow="04 / Contribution & Methodology" title={study.contribution.heading} />
+          {study.contribution.intro ? (
+            <p className="mt-8 max-w-3xl text-text-secondary leading-relaxed">{study.contribution.intro}</p>
+          ) : null}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8 mt-10">
             {study.contribution.areas.map((area, i) => (
               <div

@@ -186,13 +186,6 @@ export type FeaturedCaseStudy = {
     secondary: CaseStudyMedia;
     disclaimer: string;
   };
-  application: {
-    heading: string;
-    paragraphs: string[];
-    features: string[];
-    primary: CaseStudyMedia;
-    gallery: CaseStudyMedia[];
-  };
   role: {
     heading: string;
     description: string;
@@ -296,65 +289,6 @@ export const FEATURED_CASE_STUDIES: Record<string, FeaturedCaseStudy> = {
       disclaimer:
         "Note: this topology is the simulated design produced in Cisco Packet Tracer. It documents what the team designed and validated in simulation — not every configuration from the simulation was deployed to the existing physical network.",
     },
-    application: {
-      heading: "A Centralized Network Management Interface",
-      paragraphs: [
-        "Alongside the physical and simulated work, the team built a PHP/MySQL web application documented in the project report — a centralized place to organize device and port records and to present network-status statistics to whoever operates the network.",
-      ],
-      features: [
-        "Dashboard displaying device and port statistics",
-        "Online/offline device-status visualization",
-        "Device records management — add, edit and delete with type, IP and state",
-        "Port records management — description, speed, VLAN ID and MAC address per port",
-        "User registration and login",
-        "Network-map view of rooms and their switches",
-        "Network scan interface listing connected IP/MAC pairs",
-      ],
-      primary: {
-        src: "/projects/faculty-network-infrastructure/dashboard.png",
-        width: 970,
-        height: 455,
-        alt: "Screenshot of the application dashboard in Arabic: network control panel with statistic cards for devices, networks, open ports and IP addresses, and a status-distribution doughnut chart.",
-        caption: "Network control panel — inventory counters and a status-distribution chart.",
-      },
-      gallery: [
-        {
-          src: "/projects/faculty-network-infrastructure/device-management.png",
-          width: 1003,
-          height: 583,
-          alt: "Screenshot of the devices list page: a table of routers, switches and PCs with IP address, device type, state and working/stopped action buttons.",
-          caption: "Device records — type, IP and live state per device.",
-        },
-        {
-          src: "/projects/faculty-network-infrastructure/port-management.png",
-          width: 1075,
-          height: 536,
-          alt: "Screenshot of the ports management page: a table listing port number, state, device, description, speed, VLAN ID and MAC address with edit, delete and add buttons.",
-          caption: "Port records — speed, VLAN ID and MAC per port.",
-        },
-        {
-          src: "/projects/faculty-network-infrastructure/room-overview.png",
-          width: 863,
-          height: 679,
-          alt: "Screenshot of the network-map view: a grid of room cards (Conference Hall, A201, A301, A414, A224, A500 and more), each naming its switch and IP address with a Telnet button, around a central network illustration.",
-          caption: "Network map view — room switches with their IPs and Telnet access.",
-        },
-        {
-          src: "/projects/faculty-network-infrastructure/network-scan.png",
-          width: 1040,
-          height: 484,
-          alt: "Screenshot of the network scan page: a table pairing IP addresses with discovered MAC addresses for the selected network, with a rescan button.",
-          caption: "Network scan — connected IP/MAC pairs for the selected network.",
-        },
-        {
-          src: "/projects/faculty-network-infrastructure/login.png",
-          width: 887,
-          height: 382,
-          alt: "Screenshot of the application login screen on a dark blue background with username and password fields.",
-          caption: "Access control — each operator signs in before the panels open.",
-        },
-      ],
-    },
     role: {
       heading: "My Role as Team Leader",
       description:
@@ -435,9 +369,14 @@ export type SoftwareCaseStudy = {
   features: {
     heading: string;
     cards: SoftwareCaseStudyFeature[];
+    moreViews?: {
+      heading: string;
+      items: SoftwareCaseStudyFeature[];
+    };
   };
   contribution: {
     heading: string;
+    intro?: string;
     areas: { title: string; description: string }[];
   };
   outcome: {
@@ -461,6 +400,7 @@ export const SOFTWARE_CASE_STUDIES: Record<string, SoftwareCaseStudy> = {
       { label: "Stack", value: "PHP, MySQL, Python, Nmap" },
       { label: "Environment", value: "Apache / XAMPP" },
       { label: "Status", value: "Working prototype, as described in the project documentation" },
+      { label: "Team", value: "Graduation project — built by the full project team" },
     ],
     objective: {
       heading: "From Manual Tracking to Centralized Management",
@@ -581,9 +521,76 @@ export const SOFTWARE_CASE_STUDIES: Record<string, SoftwareCaseStudy> = {
           placeholder: "Database ERD diagram — schema screenshot to be added",
         },
       ],
+      moreViews: {
+        heading: "Working With the Records — Forms & Accounts",
+        items: [
+          {
+            title: "Adding a New Device",
+            description: "Create form capturing the new device's name, type, IP address, and starting status.",
+            image: {
+              src: "/projects/network-management-system/device-add.png",
+              width: 634,
+              height: 384,
+              alt: "Screenshot of the add-device page: a form titled Enter the new device data with fields for device name, device type, IP address and status.",
+            },
+          },
+          {
+            title: "Editing a Device",
+            description: "Edit form for updating an existing device's name, IP address and status in place.",
+            image: {
+              src: "/projects/network-management-system/device-edit.png",
+              width: 709,
+              height: 357,
+              alt: "Screenshot of the edit-device page: a form with device name, device type Switch, IP address 192.168.1.2 and a status selector.",
+            },
+          },
+          {
+            title: "Adding a Port",
+            description: "Create form for a new port record — port number, state, device, speed, VLAN ID and MAC address.",
+            image: {
+              src: "/projects/network-management-system/port-add.png",
+              width: 698,
+              height: 327,
+              alt: "Screenshot of the add-port form: empty fields for port number, state, device, description, speed, VLAN ID and MAC address with a submit button.",
+            },
+          },
+          {
+            title: "Editing a Port",
+            description: "Edit form with prefilled port details — description, speed, VLAN ID and MAC address.",
+            image: {
+              src: "/projects/network-management-system/port-edit.png",
+              width: 701,
+              height: 344,
+              alt: "Screenshot of the edit-port form prefilled for port 1 of switch-core01: description core switch, speed 1Gbps, VLAN ID 10 and MAC address AA:BB:CC:DD:EE:01.",
+            },
+          },
+          {
+            title: "Personal Profile",
+            description: "Each operator's account page — name, email, role and join date.",
+            image: {
+              src: "/projects/network-management-system/profile.png",
+              width: 658,
+              height: 361,
+              alt: "Screenshot of the personal profile page: account fields for username roaa, email roaa@email.com, role user and creation date 2025/04/17, with delete and save buttons.",
+            },
+          },
+          {
+            title: "Editing the Profile",
+            description: "Profile form for updating the operator's account details.",
+            image: {
+              src: "/projects/network-management-system/profile-edit.png",
+              width: 664,
+              height: 277,
+              alt: "Screenshot of the profile editing page: a form with username and email fields and save and cancel buttons.",
+            },
+          },
+        ],
+      },
     },
     contribution: {
       heading: "Designing the Management Workflow",
+      intro:
+        "The system was built as a team graduation project — a shared effort across its components. The areas below describe the documented implementation workflow of that team project rather than individually claimed responsibilities.",
       areas: [
         {
           title: "Data Modeling",

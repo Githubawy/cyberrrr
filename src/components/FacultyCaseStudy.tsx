@@ -18,7 +18,6 @@ export const SECTION_SPACING = "py-16 md:py-24 border-t border-border";
 export default function FacultyCaseStudy({ project, featured }: { project: Project; featured: FeaturedCaseStudy }) {
   const close = featured.physical;
   const design = featured.design;
-  const app = featured.application;
 
   return (
     <div className="min-h-screen pt-32 relative">
@@ -101,6 +100,20 @@ export default function FacultyCaseStudy({ project, featured }: { project: Proje
               </div>
             ))}
           </div>
+          <div className="mt-6 max-w-3xl p-5 bg-surface border border-border rounded-2xl flex gap-4 items-start">
+            <span className="mt-0.5 text-accent font-mono text-xs shrink-0">→</span>
+            <p className="text-text-secondary text-sm leading-relaxed">
+              The web-based network management application built for this graduation project is documented in
+              its own case study —{" "}
+              <Link
+                href="/projects/network-management-system"
+                className="text-accent font-semibold hover:underline underline-offset-4"
+              >
+                Network Management System
+              </Link>
+              .
+            </p>
+          </div>
         </section>
 
         {/* ── 2. Physical infrastructure (evidence) ──────────────── */}
@@ -149,46 +162,9 @@ export default function FacultyCaseStudy({ project, featured }: { project: Proje
           </div>
         </section>
 
-        {/* ── 4. Management application ──────────────────────────── */}
-        <section id="application" className={`${SECTION_SPACING} scroll-mt-28`}>
-          <SectionHeading eyebrow="04 / Management Application" title={app.heading} />
-          <div className="mt-8 max-w-3xl space-y-5">
-            {app.paragraphs.map((p, i) => (
-              <p key={i} className="text-text-secondary leading-relaxed">
-                {p}
-              </p>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-12 items-start">
-            <ul className="space-y-3 order-2 md:order-1">
-              {app.features.map((feature) => (
-                <li key={feature} className="flex gap-3 text-text-secondary text-sm leading-relaxed">
-                  <span className="w-2 h-2 rounded-sm bg-accent/70 mt-1.5 flex-shrink-0" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-            <div className="order-1 md:order-2">
-              <LightboxImage image={app.primary} />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-            {app.gallery.slice(0, 2).map((img) => (
-              <LightboxImage key={img.src} image={img} />
-            ))}
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-            {app.gallery.slice(2).map((img) => (
-              <LightboxImage key={img.src} image={img} />
-            ))}
-          </div>
-        </section>
-
-        {/* ── 5. Role ────────────────────────────────────────────── */}
+        {/* ── 4. Role ────────────────────────────────────────────── */}
         <section className={`${SECTION_SPACING} scroll-mt-28`}>
-          <SectionHeading eyebrow="05 / Responsibility" title={featured.role.heading} />
+          <SectionHeading eyebrow="04 / Responsibility" title={featured.role.heading} />
           <p className="mt-8 max-w-3xl text-lg text-text-primary/90 leading-relaxed border-l-2 border-accent/60 pl-6">
             {featured.role.description}
           </p>
@@ -207,9 +183,9 @@ export default function FacultyCaseStudy({ project, featured }: { project: Proje
           </div>
         </section>
 
-        {/* ── 6. Takeaways ───────────────────────────────────────── */}
+        {/* ── 5. Takeaways ───────────────────────────────────────── */}
         <section className={`${SECTION_SPACING} scroll-mt-28`}>
-          <SectionHeading eyebrow="06 / Key Takeaways" title="What the Project Left Behind" />
+          <SectionHeading eyebrow="05 / Key Takeaways" title="What the Project Left Behind" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8 mt-10">
             {featured.takeaways.map((takeaway, i) => (
               <div key={takeaway.title} className="p-7 bg-surface border border-border rounded-3xl">
