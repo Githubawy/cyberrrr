@@ -18,10 +18,10 @@ export const PROJECTS: Project[] = [
   {
     slug: "faculty-network-infrastructure",
     title: "Faculty Network Infrastructure",
-    category: "Network Architecture",
+    category: "Network Engineering & Web-Based Network Management",
     description:
       "A university faculty network project involving Cisco Packet Tracer, routers, switches, and wireless infrastructure.",
-    tags: ["Cisco Packet Tracer", "Networking", "Architecture"],
+    tags: ["Cisco Packet Tracer", "VLANs", "Networking", "PHP", "MySQL"],
     type: "Completed",
     size: "large",
     caseStudy: {
@@ -152,6 +152,256 @@ export const PROJECTS: Project[] = [
     },
   },
 ];
+
+export type CaseStudyMedia = {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  caption?: string;
+};
+
+export type FeaturedCaseStudy = {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  meta: { label: string; value: string }[];
+  overview: {
+    heading: string;
+    paragraphs: string[];
+    pillars: { title: string; description: string }[];
+  };
+  physical: {
+    id: string;
+    heading: string;
+    paragraphs: string[];
+    primary: CaseStudyMedia;
+    gallery: CaseStudyMedia[];
+  };
+  design: {
+    heading: string;
+    paragraphs: string[];
+    primary: CaseStudyMedia;
+    secondary: CaseStudyMedia;
+    disclaimer: string;
+  };
+  application: {
+    heading: string;
+    paragraphs: string[];
+    features: string[];
+    primary: CaseStudyMedia;
+    gallery: CaseStudyMedia[];
+  };
+  role: {
+    heading: string;
+    description: string;
+    areas: { title: string; description: string }[];
+  };
+  takeaways: { title: string; description: string }[];
+};
+
+export const FEATURED_CASE_STUDIES: Record<string, FeaturedCaseStudy> = {
+  "faculty-network-infrastructure": {
+    eyebrow: "Graduation Project / Network Engineering",
+    title: "Faculty Network Infrastructure",
+    subtitle: "Campus Network Design, Physical Infrastructure & Network Management",
+    description:
+      "An academic engineering project focused on improving the Faculty of Science network at Benha University through practical infrastructure maintenance, structured network simulation, and a web-based network management application.",
+    meta: [
+      { label: "Role", value: "Team Leader" },
+      { label: "Institution", value: "Faculty of Science, Benha University" },
+      { label: "Focus", value: "Network Engineering & Management" },
+      { label: "Tools", value: "Cisco Packet Tracer, PHP, MySQL" },
+    ],
+    overview: {
+      heading: "Building a More Structured Campus Network",
+      paragraphs: [
+        "The existing network at the Faculty of Science suffered from disorganized cabling, frequent data collisions, service interruptions, and difficulty maintaining reliable connectivity between departments and labs.",
+        "The graduation project approached these problems from three practical directions — the first two documented below with photos and topology evidence from the actual project.",
+      ],
+      pillars: [
+        {
+          title: "Practical Infrastructure Maintenance",
+          description:
+            "On-site work in the computer labs on the fourth and fifth floors and in the conference hall — cable connections, network-port repairs, and computer network configuration.",
+        },
+        {
+          title: "Campus Design in Cisco Packet Tracer",
+          description:
+            "A structured campus network modeled and tested in simulation, exploring VLAN segmentation, EtherChannel, and inter-VLAN routing.",
+        },
+        {
+          title: "Web-Based Network Management",
+          description:
+            "A PHP/MySQL web application to organize device and port information and display network-status statistics.",
+        },
+      ],
+    },
+    physical: {
+      id: "evidence",
+      heading: "Understanding the Existing Infrastructure",
+      paragraphs: [
+        "Before designing anything, the team documented and worked directly on the faculty's existing cabling plant — re-terminating cable connections, repairing damaged network ports, and configuring lab computers so they joined the network reliably.",
+        "The report documents an HP E8206 core switch sitting in the main cabinet with a fiber-optic connection to a distant distribution switch, feeding the access switches distributed across departments and rooms.",
+      ],
+      primary: {
+        src: "/projects/faculty-network-infrastructure/physical-network.png",
+        width: 479,
+        height: 674,
+        alt: "Photograph of a network cabinet containing a patch cabinet shelf with a D-Link Ethernet switch and many labeled grey patch cables with white number tags.",
+        caption: "Department network cabinet — patch panel and D-Link switch with numbered cable tags.",
+      },
+      gallery: [
+        {
+          src: "/projects/faculty-network-infrastructure/cabinet-247.png",
+          width: 525,
+          height: 234,
+          alt: "Network cabinet shelf with a patch panel and a cabled switch, with a hand-written 247 label on the rack rail.",
+        },
+        {
+          src: "/projects/faculty-network-infrastructure/cabinet-rack.png",
+          width: 549,
+          height: 454,
+          alt: "Floor cabinet with three stacked patch panels, an RJ-45 switch module and a TG-NET router connected by grey and white cables.",
+        },
+        {
+          src: "/projects/faculty-network-infrastructure/cabinet-unitek.png",
+          width: 481,
+          height: 382,
+          alt: "UNITEK CAT.6 patch panel on the cabinet front with a full row of patched cables feeding a 24-port switch below.",
+        },
+      ],
+    },
+    design: {
+      heading: "Campus Network Design & Simulation",
+      paragraphs: [
+        "The structured future of the network was modeled in Cisco Packet Tracer — a full campus topology converted into simulated devices covering the main campus buildings, a small campus segment, and a Health & Science building.",
+        "The simulation explored VLAN segmentation (with per-department subnets visible on the topology), EtherChannel uplinks between switches, and inter-VLAN routing through multilayer switches and ISR routers — validated with simulated traffic between departments before any design decision was written up.",
+      ],
+      primary: {
+        src: "/projects/faculty-network-infrastructure/campus-topology.webp",
+        width: 1919,
+        height: 1031,
+        alt: "Cisco Packet Tracer screenshot showing the full simulated campus topology: Main Campus with Building A, B and C, each containing access switches, PCs, printers and servers; a Small Campus segment; ISR4331 routers connected over serial links with addressing labels.",
+        caption: "Cisco Packet Tracer simulation — Main Campus (Buildings A/B/C with departmental VLANs) linked to the Small Campus segment.",
+      },
+      secondary: {
+        src: "/projects/faculty-network-infrastructure/virtual-network-figure.png",
+        width: 932,
+        height: 426,
+        alt: "Report figure showing a Packet Tracer virtual network diagram for the Faculty of Science: DMZ with domain and database server, core and distribution switches, and Chemistry, Physics and Computer Science segments with IP phones, PCs and laptops.",
+        caption: "Report Figure 3.1 — virtual network design for the Faculty of Science (DMZ + departmental segments).",
+      },
+      disclaimer:
+        "Note: this topology is the simulated design produced in Cisco Packet Tracer. It documents what the team designed and validated in simulation — not every configuration from the simulation was deployed to the existing physical network.",
+    },
+    application: {
+      heading: "A Centralized Network Management Interface",
+      paragraphs: [
+        "Alongside the physical and simulated work, the team built a PHP/MySQL web application documented in the project report — a centralized place to organize device and port records and to present network-status statistics to whoever operates the network.",
+      ],
+      features: [
+        "Dashboard displaying device and port statistics",
+        "Online/offline device-status visualization",
+        "Device records management — add, edit and delete with type, IP and state",
+        "Port records management — description, speed, VLAN ID and MAC address per port",
+        "User registration and login",
+        "Network-map view of rooms and their switches",
+        "Network scan interface listing connected IP/MAC pairs",
+      ],
+      primary: {
+        src: "/projects/faculty-network-infrastructure/dashboard.png",
+        width: 970,
+        height: 455,
+        alt: "Screenshot of the application dashboard in Arabic: network control panel with statistic cards for devices, networks, open ports and IP addresses, and a status-distribution doughnut chart.",
+        caption: "Network control panel — inventory counters and a status-distribution chart.",
+      },
+      gallery: [
+        {
+          src: "/projects/faculty-network-infrastructure/device-management.png",
+          width: 1003,
+          height: 583,
+          alt: "Screenshot of the devices list page: a table of routers, switches and PCs with IP address, device type, state and working/stopped action buttons.",
+          caption: "Device records — type, IP and live state per device.",
+        },
+        {
+          src: "/projects/faculty-network-infrastructure/port-management.png",
+          width: 1075,
+          height: 536,
+          alt: "Screenshot of the ports management page: a table listing port number, state, device, description, speed, VLAN ID and MAC address with edit, delete and add buttons.",
+          caption: "Port records — speed, VLAN ID and MAC per port.",
+        },
+        {
+          src: "/projects/faculty-network-infrastructure/room-overview.png",
+          width: 863,
+          height: 679,
+          alt: "Screenshot of the network-map view: a grid of room cards (Conference Hall, A201, A301, A414, A224, A500 and more), each naming its switch and IP address with a Telnet button, around a central network illustration.",
+          caption: "Network map view — room switches with their IPs and Telnet access.",
+        },
+        {
+          src: "/projects/faculty-network-infrastructure/network-scan.png",
+          width: 1040,
+          height: 484,
+          alt: "Screenshot of the network scan page: a table pairing IP addresses with discovered MAC addresses for the selected network, with a rescan button.",
+          caption: "Network scan — connected IP/MAC pairs for the selected network.",
+        },
+        {
+          src: "/projects/faculty-network-infrastructure/login.png",
+          width: 887,
+          height: 382,
+          alt: "Screenshot of the application login screen on a dark blue background with username and password fields.",
+          caption: "Access control — each operator signs in before the panels open.",
+        },
+      ],
+    },
+    role: {
+      heading: "My Role as Team Leader",
+      description:
+        "As Team Leader, I helped coordinate the project's technical direction and organize work across the network infrastructure, network-design, and management-application components.",
+      areas: [
+        {
+          title: "Team Coordination",
+          description: "Organizing the team's split across the three project workstreams and keeping milestones visible.",
+        },
+        {
+          title: "Practical Networking Activities",
+          description: "Coordinating the on-site maintenance work in the labs and the conference hall.",
+        },
+        {
+          title: "Network-Design Approach",
+          description: "Contributing to the topology, VLAN plan and addressing approach designed in Packet Tracer.",
+        },
+        {
+          title: "Cross-Component Alignment",
+          description: "Keeping the physical inventory, simulated design and the management application consistent with each other.",
+        },
+        {
+          title: "Documentation & Presentation",
+          description: "Pulling the physical, design and application work into the final project documentation and presentation.",
+        },
+      ],
+    },
+    takeaways: [
+      {
+        title: "Practical Network Infrastructure",
+        description: "Working hands-on with cabling, patch panels and ports — seeing how physical discipline decides network reliability.",
+      },
+      {
+        title: "VLANs & Network Simulation",
+        description: "Translating a design discipline — segmentation, EtherChannel, inter-VLAN routing — into a testable Packet Tracer model.",
+      },
+      {
+        title: "PHP/MySQL Application Development",
+        description: "Building a complete management application from schema to UI with Chart.js statistics.",
+      },
+      {
+        title: "Technical Coordination & Teamwork",
+        description: "Leading a multi-track engineering project end-to-end — from rack rooms to routing tables to web panels.",
+      },
+    ],
+  },
+};
 
 export function getProject(slug: string) {
   return PROJECTS.find((project) => project.slug === slug);

@@ -2,7 +2,8 @@ import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Stack, Target, Wrench, SealCheck } from "@phosphor-icons/react/dist/ssr";
-import { getProject, PROJECTS } from "@/lib/projects";
+import { getProject, PROJECTS, FEATURED_CASE_STUDIES } from "@/lib/projects";
+import FacultyCaseStudy from "@/components/FacultyCaseStudy";
 
 /* Dynamic detail route: allow blocking render of awaited params (Next 16) */
 export const instant = false;
@@ -17,6 +18,11 @@ export default async function ProjectPage({
 
   if (!project) {
     notFound();
+  }
+
+  const featured = FEATURED_CASE_STUDIES[slug];
+  if (featured) {
+    return <FacultyCaseStudy project={project} featured={featured} />;
   }
 
   const cs = project.caseStudy;
