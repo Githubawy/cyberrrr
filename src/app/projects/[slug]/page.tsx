@@ -2,8 +2,9 @@ import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
-import { getProject, PROJECTS, FEATURED_CASE_STUDIES } from "@/lib/projects";
+import { getProject, PROJECTS, FEATURED_CASE_STUDIES, SOFTWARE_CASE_STUDIES } from "@/lib/projects";
 import FacultyCaseStudy, { SectionHeading, SECTION_SPACING } from "@/components/FacultyCaseStudy";
+import NmsCaseStudy from "@/components/NmsCaseStudy";
 
 /* Dynamic detail route: allow blocking render of awaited params (Next 16) */
 export const instant = false;
@@ -23,6 +24,11 @@ export default async function ProjectPage({
   const featured = FEATURED_CASE_STUDIES[slug];
   if (featured) {
     return <FacultyCaseStudy project={project} featured={featured} />;
+  }
+
+  const software = SOFTWARE_CASE_STUDIES[slug];
+  if (software) {
+    return <NmsCaseStudy project={project} study={software} />;
   }
 
   const cs = project.caseStudy;

@@ -403,6 +403,248 @@ export const FEATURED_CASE_STUDIES: Record<string, FeaturedCaseStudy> = {
   },
 };
 
+export type SoftwareCaseStudyArchitectureComponent = {
+  index: string;
+  title: string;
+  description: string;
+  status: "Visible in system screenshots" | "Documented in project description";
+};
+
+export type SoftwareCaseStudyFeature = {
+  title: string;
+  description: string;
+  image?: CaseStudyMedia;
+  placeholder?: string;
+};
+
+export type SoftwareCaseStudy = {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  meta: { label: string; value: string }[];
+  objective: {
+    heading: string;
+    paragraphs: string[];
+    note: string;
+  };
+  architecture: {
+    heading: string;
+    flow: SoftwareCaseStudyArchitectureComponent[];
+  };
+  features: {
+    heading: string;
+    cards: SoftwareCaseStudyFeature[];
+  };
+  contribution: {
+    heading: string;
+    areas: { title: string; description: string }[];
+  };
+  outcome: {
+    heading: string;
+    paragraphs: string[];
+    futureWorkLabel: string;
+    futureWork: string[];
+  };
+  lessons: { title: string; description: string }[];
+};
+
+export const SOFTWARE_CASE_STUDIES: Record<string, SoftwareCaseStudy> = {
+  "network-management-system": {
+    eyebrow: "Software Development / Network Management",
+    title: "Network Management System",
+    subtitle: "Network Device Inventory, Port Management & Network Discovery",
+    description:
+      "A web-based network management prototype designed to organize device inventory, manage network-port information, discover devices on a local network, and present network information through a centralized interface.",
+    meta: [
+      { label: "Category", value: "Software Development" },
+      { label: "Stack", value: "PHP, MySQL, Python, Nmap" },
+      { label: "Environment", value: "Apache / XAMPP" },
+      { label: "Status", value: "Working prototype, as described in the project documentation" },
+    ],
+    objective: {
+      heading: "From Manual Tracking to Centralized Management",
+      paragraphs: [
+        "The project aimed to provide a more structured alternative to spreadsheet-based network-device tracking. It combined a web interface for managing device and port records with a scanning component intended to identify devices on the local network.",
+        "The system organizes network information and presents device status, IP-address details, port records, and a network-map interface in one place.",
+      ],
+      note:
+        "The screenshots in this case study verify the device inventory, port records, scanning interface, dashboard statistics, and network-map view. Reconciling scan results automatically against the inventory — with last-seen timestamps and stale-device handling — is documented in the project description as a design goal, not confirmed behavior of the prototype.",
+    },
+    architecture: {
+      heading: "How the System Fits Together",
+      flow: [
+        {
+          index: "01",
+          title: "Web Interface",
+          description:
+            "PHP pages provide the dashboard, device management, port management, scanning interface, and network-map view.",
+          status: "Visible in system screenshots",
+        },
+        {
+          index: "02",
+          title: "Application Backend",
+          description:
+            "PHP handles requests and application logic within an Apache/XAMPP environment.",
+          status: "Documented in project description",
+        },
+        {
+          index: "03",
+          title: "MySQL Database",
+          description:
+            "Stores device records, port information, and user-account data. The documented schema includes devices, ports, and users.",
+          status: "Documented in project description",
+        },
+        {
+          index: "04",
+          title: "Python Scanning Component",
+          description:
+            "The documented scanning implementation invokes Python from PHP and uses Nmap or ARP information to discover devices, extracting details such as IP and MAC addresses.",
+          status: "Documented in project description",
+        },
+        {
+          index: "05",
+          title: "Results & Visualization",
+          description:
+            "Scanning results are presented in the interface, while stored inventory data supports device and port management and dashboard statistics.",
+          status: "Visible in system screenshots",
+        },
+      ],
+    },
+    features: {
+      heading: "Core System Features",
+      cards: [
+        {
+          title: "Device Inventory",
+          description:
+            "Organizes network-device records and their attributes, including device name, type, IP address, and status.",
+          image: {
+            src: "/projects/network-management-system/device-management.png",
+            width: 1003,
+            height: 583,
+            alt: "Screenshot of the device management page: a table of devices with names, types, IP addresses and active/inactive status, with edit and delete actions.",
+            caption: "Device records — name, type, IP and status.",
+          },
+        },
+        {
+          title: "Port Management",
+          description:
+            "Maintains port records associated with network devices, including port number, status, speed, VLAN information, and MAC address where available.",
+          image: {
+            src: "/projects/network-management-system/port-management.png",
+            width: 1075,
+            height: 536,
+            alt: "Screenshot of the port management page: a table listing port number, state, device, description, speed, VLAN ID and MAC address with add, edit and delete controls.",
+            caption: "Port records — number, state, speed, VLAN ID and MAC.",
+          },
+        },
+        {
+          title: "Network Discovery",
+          description:
+            "The scanning component uses Python with Nmap or ARP information to identify devices and present discovery results, including available IP and MAC address details.",
+          image: {
+            src: "/projects/network-management-system/network-scan.png",
+            width: 1040,
+            height: 484,
+            alt: "Screenshot of the network scanning page: a table pairing discovered IP addresses with MAC addresses for the selected network, with a rescan button.",
+            caption: "Scan interface — discovered IP/MAC pairs on the local network.",
+          },
+        },
+        {
+          title: "Dashboard & Status Visualization",
+          description:
+            "Provides a centralized view of device statistics, active and inactive device status, and port-related information.",
+          image: {
+            src: "/projects/network-management-system/dashboard.png",
+            width: 970,
+            height: 455,
+            alt: "Screenshot of the application dashboard: statistic cards for devices, networks, open ports and IP addresses, alongside a status-distribution chart.",
+            caption: "Dashboard — inventory counters and status distribution.",
+          },
+        },
+        {
+          title: "Network Map",
+          description:
+            "Provides a location-oriented view of network areas and associated switch information, supported by a network diagram.",
+          image: {
+            src: "/projects/network-management-system/network-map.png",
+            width: 863,
+            height: 679,
+            alt: "Screenshot of the network map view: a grid of room cards (Conference Hall, A201, A301, A414 and more), each listing its switch and IP address with a Telnet button, arranged around a network diagram illustration.",
+            caption: "Network map — rooms, switches and the supporting diagram.",
+          },
+        },
+        {
+          title: "Database Design",
+          description:
+            "Organizes device, port, and user information through a relational MySQL schema.",
+          placeholder: "Database ERD diagram — schema screenshot to be added",
+        },
+      ],
+    },
+    contribution: {
+      heading: "Designing the Management Workflow",
+      areas: [
+        {
+          title: "Data Modeling",
+          description:
+            "Organize device and port information so that port records can be associated with their corresponding devices.",
+        },
+        {
+          title: "Discovery Integration",
+          description:
+            "Connect the web application to a Python-based scanning script and process the available discovery output.",
+        },
+        {
+          title: "Inventory Management",
+          description:
+            "Provide interfaces for viewing and maintaining device and port records.",
+        },
+        {
+          title: "Application Interface",
+          description:
+            "Use PHP templates and web technologies to present network information through a centralized dashboard.",
+        },
+      ],
+    },
+    outcome: {
+      heading: "A Foundation for Network Visibility",
+      paragraphs: [
+        "The project demonstrates how a web application, a relational database, and network-discovery tooling can be combined to organize network information and provide a centralized management interface.",
+        "The system provides a foundation for extending device inventory and network visualization capabilities.",
+      ],
+      futureWorkLabel: "Future work — not implemented in the documented prototype",
+      futureWork: [
+        "Fully connected topology graph visualization of the network",
+        "Scheduled background discovery runs",
+        "Automatic reconciliation of scanned devices with the inventory (last-seen and stale-device states)",
+      ],
+    },
+    lessons: [
+      {
+        title: "Relational Data Modeling",
+        description:
+          "Designing devices and ports as related tables — and why a port record is what ties an upstream device to the switch it plugs into.",
+      },
+      {
+        title: "PHP and MySQL Integration",
+        description:
+          "Building a working PHP/MySQL application inside Apache/XAMPP, from schema design to server-rendered templates.",
+      },
+      {
+        title: "Python-Based Network Discovery",
+        description:
+          "Using Python with Nmap/ARP information to turn raw network probing into readable IP and MAC results.",
+      },
+      {
+        title: "Network Information Visualization",
+        description:
+          "Turning rows of inventory data into dashboard statistics and a location-oriented map view operators can scan at a glance.",
+      },
+    ],
+  },
+};
+
 export function getProject(slug: string) {
   return PROJECTS.find((project) => project.slug === slug);
 }
