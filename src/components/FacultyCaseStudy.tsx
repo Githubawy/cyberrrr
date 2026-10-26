@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { PROJECTS, type Project, type FeaturedCaseStudy } from "@/lib/projects";
 import LightboxImage from "@/components/CaseStudyLightbox";
 
-function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) {
+export function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
     <div className="flex flex-col gap-3">
       <span className="text-accent font-mono text-xs uppercase tracking-[0.4em]">{eyebrow}</span>
@@ -13,7 +13,7 @@ function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) 
   );
 }
 
-const SECTION_SPACING = "py-16 md:py-24 border-t border-border";
+export const SECTION_SPACING = "py-16 md:py-24 border-t border-border";
 
 export default function FacultyCaseStudy({ project, featured }: { project: Project; featured: FeaturedCaseStudy }) {
   const close = featured.physical;
