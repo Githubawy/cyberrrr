@@ -26,6 +26,9 @@ export default function InteractiveBackground() {
     const LINK_DIST = isMobile ? 110 : 150;
     const SPEED = isMobile ? 0.25 : 0.5;
     const LINE_ALPHA = isMobile ? 0.45 : 1.0;
+    /* When motion is disabled we render one static frame — boost its ink so
+       the frozen constellation reads as a designed visual, not a dead canvas. */
+    const STATIC_HOLD = prefersReduced ? 1.8 : 1;
 
     let animationFrameId = 0;
     let resizeTimer: ReturnType<typeof setTimeout> | undefined;
@@ -67,7 +70,7 @@ export default function InteractiveBackground() {
         if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(46, 91, 255, 0.3)";
+        ctx.fillStyle = `rgba(46, 91, 255, ${Math.min(0.3 * STATIC_HOLD, 0.6)})`;
         ctx.fill();
       }
     }
@@ -85,9 +88,10 @@ export default function InteractiveBackground() {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(46, 91, 255, ${
-              (1 - dist / LINK_DIST) * LINE_ALPHA
-            })`;
+            ctx.strokeStyle = `rgba(46, 91, 255, ${Math.min(
+              (1 - dist / LINK_DIST) * LINE_ALPHA * STATIC_HOLD,
+              1
+            )})`;
             ctx.lineWidth = isMobile ? 0.4 : 0.5;
             ctx.stroke();
           }
