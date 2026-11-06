@@ -63,6 +63,16 @@ export const metadata: Metadata = {
   },
 };
 
+/* Break-out-proof serialization: escapes </script>, &, and U+2028/2029 so
+   even if schema data ever becomes dynamic it cannot escape the script tag. */
+const safeJsonLd = (value: object): string =>
+  JSON.stringify(value)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
+
 /* Structured data: tells Google this site is the identity page for Omar Qasim */
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -93,7 +103,7 @@ export default function RootLayout({
       <body className="bg-background text-text-primary">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(personJsonLd) }}
         />
         <Suspense fallback={<div className="h-16" />}>
           <Navbar />
