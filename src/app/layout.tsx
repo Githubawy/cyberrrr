@@ -90,7 +90,10 @@ const personJsonLd = {
     "Network Engineering",
     "Web Application Security",
   ],
-  sameAs: ["https://github.com/Githubawy"],
+  sameAs: [
+    "https://github.com/Githubawy",
+    "https://www.linkedin.com/in/omarqasim/",
+  ],
 };
 
 export default function RootLayout({
