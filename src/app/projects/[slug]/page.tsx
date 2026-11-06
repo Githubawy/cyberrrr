@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { ArrowLeft, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { getProject, PROJECTS, FEATURED_CASE_STUDIES, SOFTWARE_CASE_STUDIES } from "@/lib/projects";
 import FacultyCaseStudy, { SectionHeading, SECTION_SPACING } from "@/components/FacultyCaseStudy";
@@ -8,6 +9,28 @@ import NmsCaseStudy from "@/components/NmsCaseStudy";
 
 /* Dynamic detail route: allow blocking render of awaited params (Next 16) */
 export const instant = false;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProject(slug);
+  if (!project) return {};
+
+  return {
+    title: project.title,
+    description: project.description,
+    alternates: { canonical: `/projects/${slug}` },
+    openGraph: {
+      type: "article",
+      title: project.title,
+      description: project.description,
+      tags: project.tags,
+    },
+  };
+}
 
 export default async function ProjectPage({
   params,

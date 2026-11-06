@@ -1,12 +1,34 @@
 import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { ArrowLeft, SealCheck } from "@phosphor-icons/react/dist/ssr";
 import { CERTIFICATIONS, getCertification } from "@/lib/certifications";
 import CertificateImage from "@/components/CertificateImage";
 
 /* Dynamic detail route: allow blocking render of awaited params (Next 16) */
 export const instant = false;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const cert = getCertification(slug);
+  if (!cert) return {};
+
+  return {
+    title: cert.name,
+    description: cert.description,
+    alternates: { canonical: `/certifications/${slug}` },
+    openGraph: {
+      type: "article",
+      title: `${cert.name} — ${cert.issuer}`,
+      description: cert.description,
+    },
+  };
+}
 
 export default async function CertPage({
   params,

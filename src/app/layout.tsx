@@ -18,8 +18,69 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Omar Qasim | Penetration Tester",
-  description: "Professional Portfolio of Omar Qasim, a Penetration Tester and Computer Science Graduate.",
+  metadataBase: new URL("https://resume-two-sooty-55.vercel.app"),
+  title: {
+    default: "Omar Qasim | Penetration Tester",
+    template: "%s | Omar Qasim",
+  },
+  description:
+    "Professional Portfolio of Omar Qasim, a Penetration Tester and Computer Science Graduate.",
+  authors: [{ name: "Omar Qasim" }],
+  keywords: [
+    "Omar Qasim",
+    "Omar Qasim portfolio",
+    "penetration tester",
+    "security researcher",
+    "cybersecurity",
+    "penetration testing",
+    "vulnerability assessment",
+    "network engineering",
+    "CTF",
+  ],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "https://resume-two-sooty-55.vercel.app",
+    siteName: "Omar Qasim",
+    title: "Omar Qasim | Penetration Tester",
+    description:
+      "Professional Portfolio of Omar Qasim, a Penetration Tester and Computer Science Graduate.",
+    images: [
+      {
+        url: "/profile.jpg",
+        width: 1024,
+        height: 1280,
+        alt: "Omar Qasim",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Omar Qasim | Penetration Tester",
+    description:
+      "Professional Portfolio of Omar Qasim, a Penetration Tester and Computer Science Graduate.",
+    images: ["/profile.jpg"],
+  },
+};
+
+/* Structured data: tells Google this site is the identity page for Omar Qasim */
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Omar Qasim",
+  jobTitle: "Penetration Tester",
+  description:
+    "Penetration Tester and Security Researcher; Computer Science graduate with documented network-infrastructure and application projects.",
+  url: "https://resume-two-sooty-55.vercel.app",
+  image: "https://resume-two-sooty-55.vercel.app/profile.jpg",
+  knowsAbout: [
+    "Penetration Testing",
+    "Vulnerability Assessment",
+    "Network Security",
+    "Network Engineering",
+    "Web Application Security",
+  ],
+  sameAs: ["https://github.com/Githubawy"],
 };
 
 export default function RootLayout({
@@ -30,6 +91,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${jetbrainsMono.variable}`}>
       <body className="bg-background text-text-primary">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <Suspense fallback={<div className="h-16" />}>
           <Navbar />
         </Suspense>
