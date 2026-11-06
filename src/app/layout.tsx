@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Omar Qasim",
   },
   description:
-    "Professional Portfolio of Omar Qasim, a Penetration Tester and Computer Science Graduate.",
+    "Professional Portfolio of Omar Qasim, Penetration Tester and Security Researcher.",
   authors: [{ name: "Omar Qasim" }],
   keywords: [
     "Omar Qasim",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     siteName: "Omar Qasim",
     title: "Omar Qasim | Penetration Tester",
     description:
-      "Professional Portfolio of Omar Qasim, a Penetration Tester and Computer Science Graduate.",
+      "Professional Portfolio of Omar Qasim, Penetration Tester and Security Researcher.",
     images: [
       {
         url: "/profile.jpg",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Omar Qasim | Penetration Tester",
     description:
-      "Professional Portfolio of Omar Qasim, a Penetration Tester and Computer Science Graduate.",
+      "Professional Portfolio of Omar Qasim, Penetration Tester and Security Researcher.",
     images: ["/profile.jpg"],
   },
 };
@@ -80,7 +80,7 @@ const personJsonLd = {
   name: "Omar Qasim",
   jobTitle: "Penetration Tester",
   description:
-    "Penetration Tester and Security Researcher; Computer Science graduate with documented network-infrastructure and application projects.",
+    "Penetration Tester and Security Researcher with documented network-infrastructure and application projects.",
   url: "https://resume-two-sooty-55.vercel.app",
   image: "https://resume-two-sooty-55.vercel.app/profile.jpg",
   knowsAbout: [

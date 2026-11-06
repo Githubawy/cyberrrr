@@ -24,7 +24,7 @@ export default function Home() {
           >
             <h2 className="text-3xl font-bold mb-6 text-text-primary">About Me</h2>
             <p className="text-text-secondary leading-relaxed">
-              I'm a Computer Science graduate focused on penetration testing, web application security, and network security. I approach security as a practical problem-solving process: understanding how systems work, identifying weaknesses, validating potential risks in controlled environments, and documenting findings clearly. I'm continuously developing my hands-on skills through security labs, technical projects, and structured experimentation.
+              I focus on penetration testing, web application security, and network security. I approach security as a practical problem-solving process: understanding how systems work, identifying weaknesses, validating potential risks in controlled environments, and documenting findings clearly. I'm continuously developing my hands-on skills through security labs, technical projects, and structured experimentation.
             </p>
           </motion.div>
         </div>
