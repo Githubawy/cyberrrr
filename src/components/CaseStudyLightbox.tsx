@@ -12,9 +12,11 @@ type Props = {
   /** Larger hover styling for flagship screenshots */
   featured?: boolean;
   className?: string;
+  /** Optional uniform aspect-ratio frame (e.g. "aspect-[4/3]") — thumbnail is cropped with object-cover; the lightbox still shows the full image. */
+  crop?: string;
 };
 
-export default function LightboxImage({ image, priority = false, featured = false, className = "" }: Props) {
+export default function LightboxImage({ image, priority = false, featured = false, className = "", crop }: Props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -42,17 +44,31 @@ export default function LightboxImage({ image, priority = false, featured = fals
             featured ? "shadow-[0_30px_80px_rgba(0,0,0,0.35)]" : ""
           }`}
         >
-          <Image
-            src={image.src}
-            alt={image.alt}
-            width={image.width}
-            height={image.height}
-            priority={priority}
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1100px"
-            className={`w-full h-auto transition-transform duration-500 group-hover:scale-[1.015] ${
-              featured ? "bg-white" : ""
-            }`}
-          />
+          {crop ? (
+            <div className={crop}>
+              <Image
+                src={image.src}
+                alt={image.alt}
+                width={image.width}
+                height={image.height}
+                priority={priority}
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1100px"
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.015]"
+              />
+            </div>
+          ) : (
+            <Image
+              src={image.src}
+              alt={image.alt}
+              width={image.width}
+              height={image.height}
+              priority={priority}
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1100px"
+              className={`w-full h-auto transition-transform duration-500 group-hover:scale-[1.015] ${
+                featured ? "bg-white" : ""
+              }`}
+            />
+          )}
         </button>
         {image.caption ? (
           <figcaption className="mt-3 text-xs font-mono text-text-secondary leading-relaxed">

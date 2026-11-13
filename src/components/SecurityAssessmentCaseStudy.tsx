@@ -159,13 +159,11 @@ export default function SecurityAssessmentCaseStudy({
           ) : null}
 
           {study.evidence.primary ? (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mt-12 items-start">
-              <div className="lg:col-span-7">
-                <LightboxImage image={study.evidence.primary} featured />
-              </div>
-              <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-6">
+            <div className="flex flex-col gap-10 mt-12">
+              <LightboxImage image={study.evidence.primary} featured className="w-full" />
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {study.evidence.gallery.map((img) => (
-                  <LightboxImage key={img.src} image={img} />
+                  <LightboxImage key={img.src} image={img} crop="aspect-[4/3]" />
                 ))}
               </div>
             </div>
