@@ -3,10 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
-import { getProject, PROJECTS, FEATURED_CASE_STUDIES, SOFTWARE_CASE_STUDIES, ASSESSMENT_CASE_STUDIES } from "@/lib/projects";
+import { getProject, PROJECTS, FEATURED_CASE_STUDIES, SOFTWARE_CASE_STUDIES, ASSESSMENT_CASE_STUDIES, LAB_CASE_STUDIES } from "@/lib/projects";
 import FacultyCaseStudy, { SectionHeading, SECTION_SPACING } from "@/components/FacultyCaseStudy";
 import NmsCaseStudy from "@/components/NmsCaseStudy";
 import SecurityAssessmentCaseStudy from "@/components/SecurityAssessmentCaseStudy";
+import HomeLabCaseStudy from "@/components/HomeLabCaseStudy";
 
 /* Dynamic detail route: allow blocking render of awaited params (Next 16) */
 export const instant = false;
@@ -64,6 +65,11 @@ export default async function ProjectPage({
   const assessment = ASSESSMENT_CASE_STUDIES[slug];
   if (assessment) {
     return <SecurityAssessmentCaseStudy project={project} study={assessment} />;
+  }
+
+  const lab = LAB_CASE_STUDIES[slug];
+  if (lab) {
+    return <HomeLabCaseStudy project={project} study={lab} />;
   }
 
   const cs = project.caseStudy;

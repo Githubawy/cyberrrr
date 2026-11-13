@@ -832,6 +832,142 @@ export const ASSESSMENT_CASE_STUDIES: Record<string, AssessmentCaseStudy> = {
   },
 };
 
+export type LabCaseStudy = {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  technologies: string[];
+  meta: { label: string; value: string }[];
+  objective: {
+    heading: string;
+    lead: string;
+    quote: string;
+  };
+  architecture: {
+    heading: string;
+    nodes: { title: string; description: string }[];
+    flow: string[];
+    flowNote: string;
+  };
+  methodology: {
+    heading: string;
+    activities: { title: string; description: string }[];
+  };
+  outcome: {
+    heading: string;
+    quote: string;
+    paragraph: string;
+  };
+  evidence: {
+    heading: string;
+    note: string;
+    primary: CaseStudyMedia | null;
+    gallery: CaseStudyMedia[];
+  };
+};
+
+export const LAB_CASE_STUDIES: Record<string, LabCaseStudy> = {
+  "cybersecurity-home-lab": {
+    eyebrow: "Security Research / Lab Exercise",
+    title: "Cybersecurity Home Lab",
+    subtitle:
+      "A containerized cybersecurity environment for practicing web application security, offensive security techniques, and network security experiments in a controlled lab.",
+    description:
+      "The environment behind my day-to-day security practice — deliberately vulnerable applications on demand, a dedicated lab network, and a Kali workstation with clean snapshots between exercises.",
+    technologies: ["Docker", "OWASP Juice Shop", "Linux", "Kali Linux"],
+    meta: [
+      { label: "Category", value: "Security Research" },
+      { label: "Status", value: "Lab Exercise" },
+      { label: "Technologies", value: "Docker, OWASP Juice Shop, Linux, Kali Linux" },
+    ],
+    objective: {
+      heading: "Building a Controlled Security Testing Environment",
+      lead: "Designed and configured a reproducible home lab to practice offensive security techniques against deliberately vulnerable applications without targeting real-world systems.",
+      quote:
+        "The objective was to create an environment where security exercises could be performed, repeated, documented, and reviewed safely.",
+    },
+    architecture: {
+      heading: "A Containerized Testing Environment",
+      nodes: [
+        {
+          title: "Linux Host & Docker",
+          description:
+            "Linux host running Docker containers, including OWASP Juice Shop and other deliberately vulnerable applications.",
+        },
+        {
+          title: "Isolated Lab Network",
+          description:
+            "A dedicated Docker bridge network for lab targets, separating experimental services from the normal network environment.",
+        },
+        {
+          title: "Kali Linux Testing Platform",
+          description:
+            "Kali Linux virtual machine used as the testing platform, with VM snapshots available to restore a clean state between exercises.",
+        },
+      ],
+      flow: ["Kali Linux VM", "Isolated Docker Network", "Vulnerable Applications"],
+      flowNote:
+        "The Docker bridge network separates the lab target containers from the host's normal network environment. The Kali VM's own network placement depends on the lab configuration, so it is not presented here as automatically isolated from the LAN.",
+    },
+    methodology: {
+      heading: "Practical Security Exercises",
+      activities: [
+        {
+          title: "Vulnerability Testing",
+          description:
+            "Practiced common web application vulnerability classes, including injection, Cross-Site Scripting (XSS), and authentication weaknesses, against deliberately vulnerable lab applications.",
+        },
+        {
+          title: "Validation & Remediation",
+          description:
+            "Reviewed application behavior and relevant source code to understand the underlying vulnerabilities. Practiced applying security improvements and repeating tests to evaluate whether the changes addressed the original issue.",
+        },
+        {
+          title: "Documentation & Repeatability",
+          description:
+            "Maintained a lab journal documenting exercise objectives, commands, expected behavior, observed results, and technical lessons learned.",
+        },
+      ],
+    },
+    outcome: {
+      heading: "A Reusable Cybersecurity Practice Environment",
+      quote:
+        "Established a repeatable environment for launching vulnerable applications, conducting controlled security exercises, restoring clean snapshots, and testing different techniques.",
+      paragraph:
+        "The lab provides a practical foundation for developing web application security assessment skills and understanding vulnerabilities from both offensive and defensive perspectives.",
+    },
+    evidence: {
+      heading: "Visual Evidence",
+      note: "The screenshots below are genuine captures from this lab. A Docker container listing and pages from the lab journal are described in the Architecture and Methodology sections rather than shown — no illustrative stand-ins are presented as lab evidence.",
+      primary: {
+        src: "/projects/web-app-security-assessment/juice-shop.jpg",
+        width: 2778,
+        height: 1590,
+        alt: "Screenshot of OWASP Juice Shop running in the lab browser: an e-commerce storefront with an All Products heading and product cards for juices and a fruit press.",
+        caption:
+          "OWASP Juice Shop running in the lab browser — one of the deliberately vulnerable applications on the Docker network.",
+      },
+      gallery: [
+        {
+          src: "/projects/web-app-security-assessment/kali-workstation.jpg",
+          width: 1080,
+          height: 810,
+          alt: "Screenshot of the Kali Linux testing platform: a desktop with a file manager, terminal windows, a neofetch system readout and system-resource monitors.",
+          caption: "The Kali Linux testing platform — terminals ready for exercises, with snapshots to restore a clean state.",
+        },
+        {
+          src: "/projects/web-app-security-assessment/burp-repeater.jpg",
+          width: 955,
+          height: 801,
+          alt: "Screenshot of Burp Suite's Repeater tab showing HTTP request and response analysis for a lab application.",
+          caption: "Burp Suite request and response analysis during a lab exercise.",
+        },
+      ],
+    },
+  },
+};
+
 export function getProject(slug: string) {
   return PROJECTS.find((project) => project.slug === slug);
 }
