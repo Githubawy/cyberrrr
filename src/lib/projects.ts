@@ -99,33 +99,6 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    slug: "educenter-management-system",
-    title: "EduCenter Management System",
-    category: "Web Application",
-    description:
-      "Education management application involving student records, payments, and role-based access.",
-    tags: ["Web Dev", "RBAC", "Database"],
-    type: "Completed",
-    size: "small",
-    caseStudy: {
-      objective:
-        "Digitize the daily paper workflow of a small education center — student enrollment, group tracking, and payment recording — with different views for admins and staff.",
-      architecture: [
-        "Server-rendered web app on a classic PHP/MySQL stack deployed on XAMPP locally",
-        "Role-based access control (admin/staff) enforced at route level, not just in templates",
-        "Normalized schema covering students, groups, enrollments, and payment records",
-      ],
-      methodology: [
-        "Interviewed the daily workflow first and modeled the schema around it — students join groups, not payments",
-        "Enforced RBAC through a single authorization check layer so no hidden UI could bypass the rules",
-        "Payment records are append-only, keeping a clean audit trail rather than editing balances directly",
-        "Trained staff with a simple written usage guide as part of the handover",
-      ],
-      outcome:
-        "A dependable internal tool that survived real daily use — enrollments, receipts, and role separation all handled in one place instead of scattered notebooks.",
-    },
-  },
-  {
     slug: "cybersecurity-home-lab",
     title: "Cybersecurity Home Lab",
     category: "Security Research",
