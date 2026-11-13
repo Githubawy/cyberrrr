@@ -11,6 +11,13 @@ import SecurityAssessmentCaseStudy from "@/components/SecurityAssessmentCaseStud
 /* Dynamic detail route: allow blocking render of awaited params (Next 16) */
 export const instant = false;
 
+/* Only slugs present in PROJECTS are valid — removed/unknown slugs get a hard 404 */
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  return PROJECTS.map((project) => ({ slug: project.slug }));
+}
+
 export async function generateMetadata({
   params,
 }: {
