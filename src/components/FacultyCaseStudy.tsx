@@ -20,7 +20,7 @@ export default function FacultyCaseStudy({ project, featured }: { project: Proje
   const design = featured.design;
 
   return (
-    <div className="min-h-screen pt-32 relative">
+    <div className="min-h-screen pt-32 relative z-10">
       {/* soft top light, no neon */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(60%_60%_at_50%_0%,rgba(46,91,255,0.10),transparent_70%)]" />
 

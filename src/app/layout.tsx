@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, JetBrains_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import BackToTop from "@/components/BackToTop";
+import InteractiveBackground from "@/components/InteractiveBackground";
 import "./globals.css";
 import { Suspense } from "react";
 
@@ -104,6 +105,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${jetbrainsMono.variable}`}>
       <body className="bg-background text-text-primary">
+        <InteractiveBackground />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: safeJsonLd(personJsonLd) }}

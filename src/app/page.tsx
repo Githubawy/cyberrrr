@@ -5,13 +5,11 @@ import Hero from "@/components/Hero";
 import Expertise from "@/components/Expertise";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
-import InteractiveBackground from "@/components/InteractiveBackground";
 import { ArrowUpRight } from "@phosphor-icons/react";
 
 export default function Home() {
   return (
     <>
-      <InteractiveBackground />
       <Hero />
 
       <section id="about" className="py-24 px-6 relative z-10 bg-transparent">

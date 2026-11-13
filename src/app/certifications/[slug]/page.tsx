@@ -43,7 +43,7 @@ export default async function CertPage({
   }
 
   return (
-    <div className="min-h-screen pt-32 px-6 relative">
+    <div className="min-h-screen pt-32 px-6 relative z-10">
       <div className="max-w-4xl mx-auto relative z-10">
         <Link
           href="/#education"
