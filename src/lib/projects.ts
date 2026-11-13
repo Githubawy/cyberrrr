@@ -689,6 +689,176 @@ export const SOFTWARE_CASE_STUDIES: Record<string, SoftwareCaseStudy> = {
   },
 };
 
+export type AssessmentCaseStudy = {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  technologies: string[];
+  meta: { label: string; value: string }[];
+  problem: {
+    heading: string;
+    quote: string;
+  };
+  environment: {
+    heading: string;
+    nodes: { title: string; description: string }[];
+  };
+  methodology: {
+    heading: string;
+    areas: { title: string; description: string }[];
+    note: string;
+  };
+  outcome: {
+    heading: string;
+    quote: string;
+    paragraph: string;
+  };
+  takeaways: { title: string; description: string }[];
+  evidence: {
+    heading: string;
+    note: string;
+    primary: CaseStudyMedia | null;
+    gallery: CaseStudyMedia[];
+  };
+};
+
+export const ASSESSMENT_CASE_STUDIES: Record<string, AssessmentCaseStudy> = {
+  "web-app-security-assessment": {
+    eyebrow: "Security Assessment / Demonstration",
+    title: "Web Application Security Assessment",
+    subtitle: "Penetration testing and vulnerability assessment focused on OWASP risks.",
+    description:
+      "A controlled-environment demonstration of a structured web application assessment workflow — from reconnaissance to validation and reporting — organized around OWASP security principles.",
+    technologies: ["OWASP", "Burp Suite", "Kali Linux", "Nmap", "Gobuster", "sqlmap", "curl"],
+    meta: [
+      { label: "Category", value: "Security Assessment" },
+      { label: "Status", value: "Demonstration" },
+      { label: "Environment", value: "Isolated local security lab" },
+      {
+        label: "Focus",
+        value: "Web application penetration testing and vulnerability assessment",
+      },
+    ],
+    problem: {
+      heading: "Objective",
+      quote:
+        "Demonstrate a structured web application security assessment workflow in a controlled lab environment. The objective is to identify potential security weaknesses, validate findings safely, understand their impact, and document actionable remediation recommendations based on OWASP security principles.",
+    },
+    environment: {
+      heading: "Architecture & Environment",
+      nodes: [
+        {
+          title: "Testing Environment",
+          description:
+            "A deliberately vulnerable web application running in an isolated local lab, such as OWASP Juice Shop.",
+        },
+        {
+          title: "Security Testing Workstation",
+          description:
+            "Kali Linux provides the testing environment, with Burp Suite used to intercept, inspect, and modify HTTP requests during authorized testing.",
+        },
+        {
+          title: "Reconnaissance & Discovery Tools",
+          description:
+            "Nmap for authorized service discovery where applicable, Gobuster for directory and endpoint discovery, curl for HTTP request testing, and browser developer tools for examining client-side behavior. sqlmap may be used to investigate suspected SQL injection in the controlled lab.",
+        },
+        {
+          title: "Evidence & Documentation",
+          description:
+            "Record relevant requests and responses, document reproducible observations, assess potential impact, and prepare remediation recommendations.",
+        },
+      ],
+    },
+    methodology: {
+      heading: "Contribution & Methodology",
+      areas: [
+        {
+          title: "Reconnaissance",
+          description:
+            "Map application routes, identify technologies, understand authentication flows, and establish the application's observable attack surface.",
+        },
+        {
+          title: "Application Mapping",
+          description:
+            "Trace how user-controlled input moves through requests, application endpoints, and client-side rendering. Identify trust boundaries and areas that need further testing.",
+        },
+        {
+          title: "Vulnerability Assessment",
+          description:
+            "Evaluate relevant OWASP risk categories, including injection, broken access control, authentication weaknesses, and security misconfiguration. Use manual testing first and automated tools where appropriate.",
+        },
+        {
+          title: "Validation & Reporting",
+          description:
+            "Validate suspected issues using minimal, controlled proof-of-concept requests. Document the affected component, reproduction steps, evidence, potential impact, and recommended remediation.",
+        },
+      ],
+      note: "Findings are documented only where genuine evidence exists. This page describes a controlled demonstration and assessment workflow — not a professional client engagement.",
+    },
+    outcome: {
+      heading: "Outcome",
+      quote:
+        "A repeatable web application security assessment workflow for a controlled testing environment, supported by structured evidence collection and a report format covering findings, impact, severity rationale, and remediation.",
+      paragraph:
+        "The demonstration establishes a foundation for conducting more systematic web application security assessments and communicating technical findings clearly.",
+    },
+    takeaways: [
+      {
+        title: "HTTP & Request Analysis",
+        description: "Understanding requests, responses, headers, parameters, cookies, and sessions.",
+      },
+      {
+        title: "OWASP-Based Testing",
+        description: "Using recognized web application security principles to organize assessment activities.",
+      },
+      {
+        title: "Manual & Automated Testing",
+        description: "Combining hands-on validation with carefully scoped security tools.",
+      },
+      {
+        title: "Technical Reporting",
+        description: "Turning observations into reproducible findings and practical remediation advice.",
+      },
+    ],
+    evidence: {
+      heading: "Project Evidence",
+      note: "Every image below is a genuine screenshot from the lab. The Burp Suite and Kali Linux captures come from authorized testing sessions in the isolated lab, and the PortSwigger Web Security Labs advisory shows what a documented finding looks like in practice — severity, issue detail, and remediation. No claims are made beyond what the screenshots show.",
+      primary: {
+        src: "/projects/web-app-security-assessment/juice-shop.jpg",
+        width: 2778,
+        height: 1590,
+        alt: "Screenshot of the OWASP Juice Shop application running in the lab: an e-commerce storefront with an All Products heading and product cards for juices and a fruit press.",
+        caption: "The isolated lab target — OWASP Juice Shop, a deliberately vulnerable web application.",
+      },
+      gallery: [
+        {
+          src: "/projects/web-app-security-assessment/kali-workstation.jpg",
+          width: 1080,
+          height: 810,
+          alt: "Screenshot of a Kali Linux desktop running as root with a file manager, terminal windows, a neofetch system readout and system-resource monitors.",
+          caption: "The testing workstation — Kali Linux hosting the assessment tooling.",
+        },
+        {
+          src: "/projects/web-app-security-assessment/burp-repeater.jpg",
+          width: 955,
+          height: 801,
+          alt: "Screenshot of Burp Suite's Repeater tab: an intercepted GET request for a product page alongside the raw HTTP response with server headers and HTML.",
+          caption: "Burp Suite in action — intercepting, inspecting, and replaying requests during authorized testing.",
+        },
+        {
+          src: "/projects/web-app-security-assessment/xss-advisory.jpg",
+          width: 860,
+          height: 557,
+          alt: "Screenshot of a PortSwigger Web Security Labs advisory for reflected cross-site scripting: severity High/Certain, issue detail explaining the injection, and issue remediation guidance.",
+          caption:
+            "A documented finding from PortSwigger's Web Security Labs — severity, issue detail, and remediation as an assessment write-up.",
+        },
+      ],
+    },
+  },
+};
+
 export function getProject(slug: string) {
   return PROJECTS.find((project) => project.slug === slug);
 }
