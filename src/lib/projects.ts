@@ -864,10 +864,16 @@ export type LabCaseStudy = {
   evidence: {
     heading: string;
     note: string;
-    primary: CaseStudyMedia | null;
-    gallery: CaseStudyMedia[];
-    /** Optional full-width uncropped figure rendered below the gallery row (e.g. an ultra-wide terminal capture). */
-    wide: CaseStudyMedia | null;
+    /** Gallery arranged as labeled narrative groups (platform -> targets -> practice). */
+    groups: {
+      label: string;
+      /** Full-width hero image of the group (flagship styling). */
+      featured?: CaseStudyMedia;
+      /** Full-width uncropped strip (e.g. an ultra-wide terminal capture). */
+      wide?: CaseStudyMedia;
+      /** Uniform aspect-ratio crop row. */
+      row?: CaseStudyMedia[];
+    }[];
   };
 };
 
@@ -943,45 +949,74 @@ export const LAB_CASE_STUDIES: Record<string, LabCaseStudy> = {
     },
     evidence: {
       heading: "Visual Evidence",
-      note: "The images in this gallery are clearly labeled illustrative references — official OWASP Juice Shop and Kali Linux project screenshots, plus one genuine terminal capture of the Juice Shop container sourced from a CC BY 4.0 community lab write-up (securityfox). They illustrate the tools this lab is built around and are not captures from the lab itself. A lab-journal page is described in the Methodology section rather than shown.",
-      primary: {
-        src: "/projects/cybersecurity-home-lab/juice-shop-scoreboard.png",
-        width: 2508,
-        height: 1389,
-        badge: "Illustrative",
-        alt: "Official OWASP Juice Shop Score Board screenshot showing a hacking-challenges progress bar at 43 percent, a star difficulty rating, a search field, and challenge cards grouped under vulnerability-category tags such as Broken Access Control, Injection and XSS.",
-        caption:
-          "Illustrative reference — the official OWASP Juice Shop Score Board (Juice Shop project screenshot): the challenge-tracking view of the deliberately vulnerable application this lab is built around.",
-      },
-      gallery: [
+      note: "The images in this gallery are clearly labeled illustrative references — official OWASP Juice Shop and Kali Linux project screenshots, plus genuine terminal and browser captures sourced from a CC BY 4.0 community lab write-up (securityfox). They are arranged to follow the lab's flow — testing platform, lab targets, then practice — and are not captures from the lab itself. A lab-journal page is described in the Methodology section rather than shown.",
+      groups: [
         {
-          src: "/projects/cybersecurity-home-lab/juice-shop-challenges.png",
-          width: 2512,
-          height: 1381,
-          badge: "Illustrative",
-          alt: "Official OWASP Juice Shop screenshot showing the All Products storefront page with push notifications announcing solved hacking challenges over a confetti animation.",
-          caption:
-            "Illustrative reference — the official OWASP Juice Shop storefront with challenge-solved notifications (Juice Shop project screenshot): the application's built-in feedback for practicing vulnerability classes.",
+          label: "The Testing Platform · Kali Linux",
+          featured: {
+            src: "/projects/cybersecurity-home-lab/kali-desktop-xfce.jpg",
+            width: 889,
+            height: 500,
+            badge: "Illustrative",
+            alt: "Official Kali Linux screenshot showing the default Xfce desktop: a file manager, two terminal windows with Kali system information and code, and system-resource monitors on a blue dragon wallpaper.",
+            caption:
+              "Illustrative reference — the Kali Linux Xfce desktop with terminals open (official kali.org screenshot): the testing platform the lab uses, shown as a project reference rather than a lab capture.",
+          },
         },
         {
-          src: "/projects/cybersecurity-home-lab/kali-desktop-xfce.jpg",
-          width: 889,
-          height: 500,
-          badge: "Illustrative",
-          alt: "Official Kali Linux screenshot showing the default Xfce desktop: a file manager, two terminal windows with Kali system information and code, and system-resource monitors on a blue dragon wallpaper.",
-          caption:
-            "Illustrative reference — the Kali Linux Xfce desktop with terminals open (official kali.org screenshot): the testing platform the lab uses, shown as a project reference rather than a lab capture.",
+          label: "The Lab Targets · Docker",
+          wide: {
+            src: "/projects/cybersecurity-home-lab/docker-ps-illustrative.png",
+            width: 1022,
+            height: 175,
+            badge: "Illustrative",
+            alt: "Genuine terminal capture showing docker run -d -p 3000:3000 bkimminich/juice-shop followed by docker ps, listing the juice-shop container as Up About a minute with port mapping 0.0.0.0:3000->3000/tcp.",
+            caption:
+              "Illustrative reference — a genuine docker run + docker ps terminal capture launching the OWASP Juice Shop container (sourced from securityfox, CC BY 4.0): the same container image and Docker workflow this lab is built on.",
+          },
+          row: [
+            {
+              src: "/projects/cybersecurity-home-lab/juice-shop-in-kali-browser.png",
+              width: 849,
+              height: 624,
+              badge: "Illustrative",
+              alt: "Illustrative capture showing the OWASP Juice Shop loaded in a Kali Linux Firefox browser at 192.168.56.20:3000, with Kali bookmarks such as Kali Tools, Kali Docs and Exploit-DB visible in the toolbar.",
+              caption:
+                "Illustrative reference — the Juice Shop target reached from the Kali testing platform over the lab network (sourced from securityfox, CC BY 4.0).",
+            },
+            {
+              src: "/projects/cybersecurity-home-lab/juice-shop-search.png",
+              width: 2515,
+              height: 1398,
+              badge: "Illustrative",
+              alt: "Official OWASP Juice Shop screenshot showing the storefront search results page after submitting a search query.",
+              caption:
+                "Illustrative reference — the official OWASP Juice Shop search results view (Juice Shop project screenshot): probing the running target like a user during practice.",
+            },
+          ],
+        },
+        {
+          label: "The Practice Workflow · OWASP Juice Shop",
+          featured: {
+            src: "/projects/cybersecurity-home-lab/juice-shop-scoreboard.png",
+            width: 2508,
+            height: 1389,
+            badge: "Illustrative",
+            alt: "Official OWASP Juice Shop Score Board screenshot showing a hacking-challenges progress bar at 43 percent, a star difficulty rating, a search field, and challenge cards grouped under vulnerability-category tags such as Broken Access Control, Injection and XSS.",
+            caption:
+              "Illustrative reference — the official OWASP Juice Shop Score Board (Juice Shop project screenshot): the challenge-tracking view used to plan and review practice exercises.",
+          },
+          wide: {
+            src: "/projects/cybersecurity-home-lab/juice-shop-challenges.png",
+            width: 2512,
+            height: 1381,
+            badge: "Illustrative",
+            alt: "Official OWASP Juice Shop screenshot showing the All Products storefront page with push notifications announcing solved hacking challenges over a confetti animation.",
+            caption:
+              "Illustrative reference — the official OWASP Juice Shop storefront with challenge-solved notifications (Juice Shop project screenshot): the application's built-in feedback during practice.",
+          },
         },
       ],
-      wide: {
-        src: "/projects/cybersecurity-home-lab/docker-ps-illustrative.png",
-        width: 1022,
-        height: 175,
-        badge: "Illustrative",
-        alt: "Genuine terminal capture showing docker run -d -p 3000:3000 bkimminich/juice-shop followed by docker ps, listing the juice-shop container as Up About a minute with port mapping 0.0.0.0:3000->3000/tcp.",
-        caption:
-          "Illustrative reference — a genuine docker run + docker ps terminal capture launching the OWASP Juice Shop container (sourced from securityfox, CC BY 4.0): the same container image and Docker workflow this lab is built on.",
-      },
     },
   },
 };

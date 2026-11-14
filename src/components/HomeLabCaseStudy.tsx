@@ -167,15 +167,30 @@ export default function HomeLabCaseStudy({
             <p className="text-text-secondary text-sm leading-relaxed">{study.evidence.note}</p>
           </div>
 
-          {study.evidence.primary ? (
-            <div className="flex flex-col gap-10 mt-12">
-              <LightboxImage image={study.evidence.primary} featured className="w-full" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto w-full">
-                {study.evidence.gallery.map((img) => (
-                  <LightboxImage key={img.src} image={img} crop="aspect-[4/3]" />
-                ))}
-              </div>
-              {study.evidence.wide ? <LightboxImage image={study.evidence.wide} className="w-full" /> : null}
+          {study.evidence.groups.length ? (
+            <div className="flex flex-col gap-14 mt-12">
+              {study.evidence.groups.map((group) => (
+                <div key={group.label}>
+                  <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-accent mb-5">
+                    {group.label}
+                  </p>
+                  <div className="flex flex-col gap-8">
+                    {group.featured ? <LightboxImage image={group.featured} featured className="w-full" /> : null}
+                    {group.wide ? <LightboxImage image={group.wide} className="w-full" /> : null}
+                    {group.row?.length ? (
+                      <div
+                        className={`grid grid-cols-1 gap-6 max-w-4xl mx-auto w-full ${
+                          group.row.length >= 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"
+                        }`}
+                      >
+                        {group.row.map((img) => (
+                          <LightboxImage key={img.src} image={img} crop="aspect-[4/3]" />
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              ))}
             </div>
           ) : (
             <p className="mt-10 max-w-3xl text-text-secondary leading-relaxed">
