@@ -175,6 +175,7 @@ export default function HomeLabCaseStudy({
                   <LightboxImage key={img.src} image={img} crop="aspect-[4/3]" />
                 ))}
               </div>
+              {study.evidence.wide ? <LightboxImage image={study.evidence.wide} className="w-full" /> : null}
             </div>
           ) : (
             <p className="mt-10 max-w-3xl text-text-secondary leading-relaxed">

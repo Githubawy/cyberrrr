@@ -866,6 +866,8 @@ export type LabCaseStudy = {
     note: string;
     primary: CaseStudyMedia | null;
     gallery: CaseStudyMedia[];
+    /** Optional full-width uncropped figure rendered below the gallery row (e.g. an ultra-wide terminal capture). */
+    wide: CaseStudyMedia | null;
   };
 };
 
@@ -941,7 +943,7 @@ export const LAB_CASE_STUDIES: Record<string, LabCaseStudy> = {
     },
     evidence: {
       heading: "Visual Evidence",
-      note: "The images in this gallery are clearly labeled illustrative reference screenshots taken from the official OWASP Juice Shop and Kali Linux projects — they illustrate the tools this lab is built around and are not captures from the lab itself. A Docker container listing and pages from the lab journal are described in the Architecture and Methodology sections rather than shown.",
+      note: "The images in this gallery are clearly labeled illustrative references — official OWASP Juice Shop and Kali Linux project screenshots, plus one genuine terminal capture of the Juice Shop container sourced from a CC BY 4.0 community lab write-up (securityfox). They illustrate the tools this lab is built around and are not captures from the lab itself. A lab-journal page is described in the Methodology section rather than shown.",
       primary: {
         src: "/projects/cybersecurity-home-lab/juice-shop-scoreboard.png",
         width: 2508,
@@ -962,15 +964,24 @@ export const LAB_CASE_STUDIES: Record<string, LabCaseStudy> = {
             "Illustrative reference — the official OWASP Juice Shop storefront with challenge-solved notifications (Juice Shop project screenshot): the application's built-in feedback for practicing vulnerability classes.",
         },
         {
-          src: "/projects/cybersecurity-home-lab/kali-desktop-illustrative.png",
-          width: 1658,
-          height: 1229,
+          src: "/projects/cybersecurity-home-lab/kali-desktop-xfce.jpg",
+          width: 889,
+          height: 500,
           badge: "Illustrative",
-          alt: "Official Kali Linux project screenshot showing the Kali Purple Xfce desktop in a VMware window, with a terminal running a neofetch system readout.",
+          alt: "Official Kali Linux screenshot showing the default Xfce desktop: a file manager, two terminal windows with Kali system information and code, and system-resource monitors on a blue dragon wallpaper.",
           caption:
-            "Illustrative reference — the Kali Linux Xfce desktop (official Kali project screenshot): the testing platform the lab uses, shown here as a project reference rather than a lab capture.",
+            "Illustrative reference — the Kali Linux Xfce desktop with terminals open (official kali.org screenshot): the testing platform the lab uses, shown as a project reference rather than a lab capture.",
         },
       ],
+      wide: {
+        src: "/projects/cybersecurity-home-lab/docker-ps-illustrative.png",
+        width: 1022,
+        height: 175,
+        badge: "Illustrative",
+        alt: "Genuine terminal capture showing docker run -d -p 3000:3000 bkimminich/juice-shop followed by docker ps, listing the juice-shop container as Up About a minute with port mapping 0.0.0.0:3000->3000/tcp.",
+        caption:
+          "Illustrative reference — a genuine docker run + docker ps terminal capture launching the OWASP Juice Shop container (sourced from securityfox, CC BY 4.0): the same container image and Docker workflow this lab is built on.",
+      },
     },
   },
 };
