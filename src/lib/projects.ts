@@ -132,6 +132,8 @@ export type CaseStudyMedia = {
   height: number;
   alt: string;
   caption?: string;
+  /** Optional small mono chip rendered on the figure, e.g. "Illustrative" — flags web-sourced reference visuals. */
+  badge?: string;
 };
 
 export type FeaturedCaseStudy = {
@@ -939,29 +941,34 @@ export const LAB_CASE_STUDIES: Record<string, LabCaseStudy> = {
     },
     evidence: {
       heading: "Visual Evidence",
-      note: "The screenshots below are genuine captures from this lab. A Docker container listing and pages from the lab journal are described in the Architecture and Methodology sections rather than shown — no illustrative stand-ins are presented as lab evidence.",
+      note: "The images in this gallery are clearly labeled illustrative reference screenshots taken from the official OWASP Juice Shop and Kali Linux projects — they illustrate the tools this lab is built around and are not captures from the lab itself. A Docker container listing and pages from the lab journal are described in the Architecture and Methodology sections rather than shown.",
       primary: {
-        src: "/projects/web-app-security-assessment/juice-shop.jpg",
-        width: 2778,
-        height: 1590,
-        alt: "Screenshot of OWASP Juice Shop running in the lab browser: an e-commerce storefront with an All Products heading and product cards for juices and a fruit press.",
+        src: "/projects/cybersecurity-home-lab/juice-shop-scoreboard.png",
+        width: 2508,
+        height: 1389,
+        badge: "Illustrative",
+        alt: "Official OWASP Juice Shop Score Board screenshot showing a hacking-challenges progress bar at 43 percent, a star difficulty rating, a search field, and challenge cards grouped under vulnerability-category tags such as Broken Access Control, Injection and XSS.",
         caption:
-          "OWASP Juice Shop running in the lab browser — one of the deliberately vulnerable applications on the Docker network.",
+          "Illustrative reference — the official OWASP Juice Shop Score Board (Juice Shop project screenshot): the challenge-tracking view of the deliberately vulnerable application this lab is built around.",
       },
       gallery: [
         {
-          src: "/projects/web-app-security-assessment/kali-workstation.jpg",
-          width: 1080,
-          height: 810,
-          alt: "Screenshot of the Kali Linux testing platform: a desktop with a file manager, terminal windows, a neofetch system readout and system-resource monitors.",
-          caption: "The Kali Linux testing platform — terminals ready for exercises, with snapshots to restore a clean state.",
+          src: "/projects/cybersecurity-home-lab/juice-shop-challenges.png",
+          width: 2512,
+          height: 1381,
+          badge: "Illustrative",
+          alt: "Official OWASP Juice Shop screenshot showing the All Products storefront page with push notifications announcing solved hacking challenges over a confetti animation.",
+          caption:
+            "Illustrative reference — the official OWASP Juice Shop storefront with challenge-solved notifications (Juice Shop project screenshot): the application's built-in feedback for practicing vulnerability classes.",
         },
         {
-          src: "/projects/web-app-security-assessment/burp-repeater.jpg",
-          width: 955,
-          height: 801,
-          alt: "Screenshot of Burp Suite's Repeater tab showing HTTP request and response analysis for a lab application.",
-          caption: "Burp Suite request and response analysis during a lab exercise.",
+          src: "/projects/cybersecurity-home-lab/kali-desktop-illustrative.png",
+          width: 1658,
+          height: 1229,
+          badge: "Illustrative",
+          alt: "Official Kali Linux project screenshot showing the Kali Purple Xfce desktop in a VMware window, with a terminal running a neofetch system readout.",
+          caption:
+            "Illustrative reference — the Kali Linux Xfce desktop (official Kali project screenshot): the testing platform the lab uses, shown here as a project reference rather than a lab capture.",
         },
       ],
     },

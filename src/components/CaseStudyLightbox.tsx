@@ -40,10 +40,19 @@ export default function LightboxImage({ image, priority = false, featured = fals
           onClick={() => setOpen(true)}
           aria-label={`Enlarge image: ${image.alt}`}
           title="Click to enlarge"
-          className={`group block w-full overflow-hidden rounded-2xl border border-border bg-surface cursor-zoom-in transition-colors duration-300 hover:border-accent/40 focus-visible:outline-2 focus-visible:outline-accent ${
+          className={`group relative block w-full overflow-hidden rounded-2xl border border-border bg-surface cursor-zoom-in transition-colors duration-300 hover:border-accent/40 focus-visible:outline-2 focus-visible:outline-accent ${
             featured ? "shadow-[0_30px_80px_rgba(0,0,0,0.35)]" : ""
           }`}
         >
+          {image.badge ? (
+            <span
+              className={`absolute left-3 top-3 z-10 text-[9px] font-mono uppercase tracking-[0.2em] px-2 py-1 rounded-full bg-background/85 border border-border text-text-secondary backdrop-blur-sm ${
+                crop ? "" : "group-hover:opacity-0 transition-opacity duration-300"
+              }`}
+            >
+              {image.badge}
+            </span>
+          ) : null}
           {crop ? (
             <div className={crop}>
               <Image
