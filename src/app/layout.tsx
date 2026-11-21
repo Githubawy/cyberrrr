@@ -97,7 +97,23 @@ const personJsonLd = {
   sameAs: [
     "https://github.com/Githubawy",
     "https://www.linkedin.com/in/omarqasim/",
+    "https://www.upwork.com/freelancers/~01fc5c0390db831dd6",
+    "https://pro.fiverr.com/s/mmmdVL9",
+    "https://contra.com/omar_qasim_ggsaxbpv",
+    "https://www.freelancer.com/u/omarqasim55",
+    "https://hackerone.com/omarqasim",
+    "https://bugcrowd.com/h/phill0",
+    "https://yeswehack.com/hunters/OmarQasim",
+    "https://app.intigriti.com/researcher/profile/omarqasim",
   ],
+  worksFor: {
+    "@type": "Organization",
+    name: "Emperial EG",
+  },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Benha University",
+  },
 };
 
 export default function RootLayout({
