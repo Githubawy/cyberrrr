@@ -8,6 +8,7 @@ import FacultyCaseStudy, { SectionHeading, SECTION_SPACING } from "@/components/
 import NmsCaseStudy from "@/components/NmsCaseStudy";
 import SecurityAssessmentCaseStudy from "@/components/SecurityAssessmentCaseStudy";
 import HomeLabCaseStudy from "@/components/HomeLabCaseStudy";
+import LightboxImage from "@/components/CaseStudyLightbox";
 
 /* Dynamic detail route: allow blocking render of awaited params (Next 16) */
 export const instant = false;
@@ -105,6 +106,18 @@ export default async function ProjectPage({
               >
                 View the Outcome
               </a>
+              {project.links?.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-7 py-3.5 bg-transparent border border-accent/40 text-accent text-sm font-bold rounded-full hover:bg-accent/10 transition-all active:scale-95 inline-flex items-center gap-2"
+                >
+                  {link.label}
+                  <ArrowUpRight size={16} />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -122,10 +135,25 @@ export default async function ProjectPage({
                 <dt className="text-[10px] font-mono uppercase tracking-[0.3em] text-accent">Status</dt>
                 <dd className="text-sm text-text-primary leading-relaxed">{project.type}</dd>
               </div>
-              <div className="py-4 last:pb-0 flex flex-col gap-1.5">
+              <div className="py-4 flex flex-col gap-1.5">
                 <dt className="text-[10px] font-mono uppercase tracking-[0.3em] text-accent">Technologies</dt>
                 <dd className="text-sm text-text-primary leading-relaxed">{project.tags.join(", ")}</dd>
               </div>
+              {project.links?.[0] ? (
+                <div className="py-4 last:pb-0 flex flex-col gap-1.5">
+                  <dt className="text-[10px] font-mono uppercase tracking-[0.3em] text-accent">Live Site</dt>
+                  <dd className="text-sm leading-relaxed break-all">
+                    <a
+                      href={project.links[0].href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent hover:underline"
+                    >
+                      {project.links[0].href.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
             </dl>
             <div className="flex flex-wrap gap-2 pt-6 mt-2 border-t border-border">
               {project.tags.map((tag) => (
@@ -181,6 +209,36 @@ export default async function ProjectPage({
             {cs.outcome}
           </p>
         </section>
+
+        {/* ── 05 Build (optional real screenshots) ───────────────── */}
+        {project.media ? (
+          <section id="build" className={`${SECTION_SPACING} scroll-mt-28`}>
+            <SectionHeading eyebrow="05 / The Build" title={project.media.heading} />
+            {project.media.intro ? (
+              <p className="mt-8 max-w-3xl text-text-secondary leading-relaxed">{project.media.intro}</p>
+            ) : null}
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
+              {project.media.items.map((image, i) => (
+                <LightboxImage
+                  key={image.src}
+                  image={image}
+                  className={
+                    image.width < image.height
+                      ? "md:col-span-2 mx-auto w-full max-w-xs"
+                      : i === 0
+                        ? "md:col-span-2"
+                        : ""
+                  }
+                />
+              ))}
+            </div>
+            {project.media.note ? (
+              <p className="mt-8 text-xs font-mono text-text-secondary leading-relaxed border-l-2 border-border pl-4">
+                {project.media.note}
+              </p>
+            ) : null}
+          </section>
+        ) : null}
 
         {/* ── Closing ────────────────────────────────────────────── */}
         <section className={`${SECTION_SPACING} pb-24`}>

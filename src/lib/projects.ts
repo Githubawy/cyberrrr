@@ -12,6 +12,15 @@ export type Project = {
     methodology: string[];
     outcome: string;
   };
+  /** Optional outbound link to a live build — rendered as a CTA and in the details panel. */
+  links?: { label: string; href: string }[];
+  /** Optional real screenshots of the built product, rendered as a lightbox gallery. */
+  media?: {
+    heading: string;
+    intro?: string;
+    note?: string;
+    items: CaseStudyMedia[];
+  };
 };
 
 export const PROJECTS: Project[] = [
@@ -152,6 +161,49 @@ export const PROJECTS: Project[] = [
       ],
       outcome:
         "A live production site serving as the marketplace's public storefront and satisfying the legal-page requirements for its Android release. It runs on a temporary Vercel domain until the client's own domain is purchased.",
+    },
+    links: [
+      {
+        label: "Visit the live site",
+        href: "https://el-ataba-website.vercel.app/",
+      },
+    ],
+    media: {
+      heading: "Screenshots from the Live Site",
+      intro:
+        "Captured from the production deployment at 1440×900 and 390×844. The site is Arabic-first, with a full English translation layer switched at runtime.",
+      note:
+        "The build currently runs on a temporary Vercel deployment; the link above will move to the client's own domain once it is purchased.",
+      items: [
+        {
+          src: "/projects/el-ataba-marketplace/home-desktop-ar.png",
+          width: 1440,
+          height: 900,
+          alt: "El Ataba Marketplace home page in Arabic at desktop width, showing the right-to-left layout and the hero phone mockup",
+          caption: "Home page, Arabic (default) — right-to-left layout at 1440×900.",
+        },
+        {
+          src: "/projects/el-ataba-marketplace/home-desktop-en.png",
+          width: 1440,
+          height: 900,
+          alt: "El Ataba Marketplace home page in English at desktop width after switching the language",
+          caption: "The same page in English — the language switch flips copy and direction at runtime.",
+        },
+        {
+          src: "/projects/el-ataba-marketplace/about-desktop-en.png",
+          width: 1440,
+          height: 900,
+          alt: "El Ataba Marketplace About page in English, showing the mission section and marketplace feature cards",
+          caption: "About page — company context and marketplace features, also fully bilingual.",
+        },
+        {
+          src: "/projects/el-ataba-marketplace/home-mobile-en.png",
+          width: 390,
+          height: 844,
+          alt: "El Ataba Marketplace home page on a 390-pixel-wide mobile viewport",
+          caption: "Mobile layout at 390×844.",
+        },
+      ],
     },
   },
 ];
