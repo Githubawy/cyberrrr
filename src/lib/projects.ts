@@ -124,6 +124,36 @@ export const PROJECTS: Project[] = [
         "A permanent, always-available practice environment: spin up a target, attack it, revert, and try a different technique — the muscle memory behind all my assessment work.",
     },
   },
+  {
+    slug: "el-ataba-marketplace",
+    title: "El Ataba Marketplace",
+    category: "Web Development & E-Commerce",
+    description:
+      "A bilingual Arabic/English marketplace website for an Egyptian wholesale and retail platform, including the legal pages its Android app needs for Google Play.",
+    tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "React Router", "Firebase"],
+    type: "Completed",
+    size: "medium",
+    caseStudy: {
+      objective:
+        "Give an Egyptian wholesale-and-retail marketplace a public web presence: a bilingual, Arabic-first (right-to-left) site that explains the Android app to buyers and merchants, and provides the legal and support pages Google Play requires before an app can be published.",
+      architecture: [
+        "React 19 single-page application built with Vite and TypeScript, routed with React Router",
+        "Arabic-first layout with full RTL support and an English translation layer switched at runtime through a language context",
+        "Tailwind CSS for styling, with shared layout components (navbar, footer) and reusable UI such as the Google Play badge and QR download modal",
+        "Content, contacts, and legal text centralized in typed config and data modules so copy is edited in one place",
+        "Firebase project configuration for backend services, plus SPA rewrite rules so client-side routes resolve on refresh",
+      ],
+      methodology: [
+        "Structured the pages around what a first-time buyer asks — what the marketplace is, who the merchants are, how delivery works, how to get the app — before writing components",
+        "Built the language layer first so every string, layout direction, and font choice works in both Arabic and English instead of being retrofitted",
+        "Treated the Play Store compliance set (privacy policy, terms, account-deletion request) as first-class pages, since the app cannot ship without them",
+        "Added an accessible form-validation hook and keyboard-friendly dialogs for the contact and support flows",
+        "Deployed as a static build with SPA fallback routing, keeping hosting simple while the client arranges a custom domain",
+      ],
+      outcome:
+        "A live production site serving as the marketplace's public storefront and satisfying the legal-page requirements for its Android release. It runs on a temporary Vercel domain until the client's own domain is purchased.",
+    },
+  },
 ];
 
 export type CaseStudyMedia = {
