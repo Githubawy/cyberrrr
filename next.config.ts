@@ -47,6 +47,18 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+  /* Permanent move from the auto-generated Vercel host to the branded
+     domain, so Google consolidates the old indexed URL onto the new one. */
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "resume-two-sooty-55.vercel.app" }],
+        destination: "https://omarqasim.is-a.dev/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
