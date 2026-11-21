@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://resume-two-sooty-55.vercel.app/sitemap.xml",
+    sitemap: "https://omarqasim.is-a.dev/sitemap.xml",
   };
 }

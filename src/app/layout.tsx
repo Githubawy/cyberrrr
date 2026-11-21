@@ -19,7 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://resume-two-sooty-55.vercel.app"),
+  metadataBase: new URL("https://omarqasim.is-a.dev"),
   title: {
     default: "Omar Qasim | Penetration Tester",
     template: "%s | Omar Qasim",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    url: "https://resume-two-sooty-55.vercel.app",
+    url: "https://omarqasim.is-a.dev",
     siteName: "Omar Qasim",
     title: "Omar Qasim | Penetration Tester",
     description:
@@ -82,8 +82,8 @@ const personJsonLd = {
   jobTitle: "Penetration Tester",
   description:
     "Penetration Tester and Security Researcher with documented network-infrastructure and application projects.",
-  url: "https://resume-two-sooty-55.vercel.app",
-  image: "https://resume-two-sooty-55.vercel.app/profile.jpg",
+  url: "https://omarqasim.is-a.dev",
+  image: "https://omarqasim.is-a.dev/profile.jpg",
   knowsAbout: [
     "Penetration Testing",
     "Vulnerability Assessment",

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { PROJECTS } from "@/lib/projects";
 import { CERTIFICATIONS } from "@/lib/certifications";
 
-const SITE_URL = "https://resume-two-sooty-55.vercel.app";
+const SITE_URL = "https://omarqasim.is-a.dev";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
