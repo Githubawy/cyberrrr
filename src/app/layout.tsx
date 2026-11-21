@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   description:
     "Professional Portfolio of Omar Qasim, Penetration Tester and Security Researcher.",
   authors: [{ name: "Omar Qasim" }],
+  verification: {
+    google: "sC9LgfuGY2EMKL-AcjIvlLUfy8EReNP4FQ6b_8XfSYc",
+  },
   keywords: [
     "Omar Qasim",
     "Omar Qasim portfolio",
